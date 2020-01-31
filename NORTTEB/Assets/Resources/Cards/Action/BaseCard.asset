@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 2
-  cardTier: 2
+  cardTier: 1
   cardName: Volatile Technomechanics
-  cardDescription: Chance to increase or decrease your hand size for the next 2 turns
-  events: []
+  cardDescription: Chance to increase or decrease your hand size
+  events:
+  - eventType: 3
+    valueRange: {x: 1, y: 2}
+    cardType: 2
+    resourceType: 0
+    eventTypeNix: 0
+    tetrisPiece: {fileID: 0}
   delayedEvents: []
