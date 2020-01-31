@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
-  cardTier: 1
+  cardTier: 0
   cardName: Satellite foraging
   cardDescription: Strip a satellite for metal.
+  flavourText: FlavourText
   events:
   - eventType: 4
     valueRange: {x: 0, y: 0}

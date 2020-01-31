@@ -50,6 +50,7 @@ public class BaseCard : ScriptableObject
     public int cardTier = 1;
     public string cardName = "New Card";
     public string cardDescription = "DescriptionText";
+    public string flavourText = "FlavourText";
 
     public List<Event> events = new List<Event>();
     public List<DelayedEvent> delayedEvents = new List<DelayedEvent>();

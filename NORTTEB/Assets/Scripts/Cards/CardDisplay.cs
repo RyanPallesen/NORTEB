@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CardDisplay : MonoBehaviour
+public class CardDisplay : MonoBehaviour, IPointerEnterHandler
 {
     public TextMeshProUGUI card1Title;
     public TextMeshProUGUI card1Description;
@@ -13,35 +14,39 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI card2Title;
     public TextMeshProUGUI card2Description;
 
-    public BaseCard card1;
-    public BaseCard card2;
+    private Card card;
 
     private void Start()
     {
-        if(card1.isFullCard)
+        if(Card.cardPrimary.isFullCard)
         {
-            card2 = card1;
+            Card.cardSecondary = Card.cardPrimary;
         }
-        else if(card2.isFullCard)
+        else if(Card.cardSecondary.isFullCard)
         {
-            card1 = card2;
+            Card.cardPrimary = Card.cardSecondary;
         }
     }
 
-    bool card1Displayed = true;
+    public bool card1Displayed = true;
+
+    public Card Card { get => card; set {card = value; UpdateText(); } }
 
     public void UpdateText()
     {
-        card1Title.text = card1.cardName;
-        card1Description.text = card1.cardDescription;
+        card1Title.text = Card.cardPrimary.cardName;
+        card1Description.text = Card.cardPrimary.cardDescription;
 
-        if(card1Displayed)
+        card2Title.text = Card.cardSecondary.cardName;
+        card2Description.text = Card.cardSecondary.cardDescription;
+
+        if (card1Displayed)
         {
-            cardType.text = card1.baseCardType.ToString();
+            cardType.text = Card.cardPrimary.baseCardType.ToString();
         }
         else
         {
-            cardType.text = card2.baseCardType.ToString();
+            cardType.text = Card.cardSecondary.baseCardType.ToString();
         }
 
 
@@ -56,5 +61,19 @@ public class CardDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (card1Displayed)
+        {
+            ToolTipHandler.Instance.textmesh.text = Card.cardPrimary.flavourText;
+
+        }
+        else
+        {
+            ToolTipHandler.Instance.textmesh.text = Card.cardSecondary.flavourText;
+
+        }
     }
 }

@@ -63,9 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Cards\BaseCard.cs" />
+    <Compile Include="Assets\Scripts\Cards\Card.cs" />
     <Compile Include="Assets\Scripts\Cards\CardDisplay.cs" />
+    <Compile Include="Assets\Scripts\Cards\Deck.cs" />
+    <Compile Include="Assets\Scripts\Cards\Hand.cs" />
     <Compile Include="Assets\Scripts\GridModule\Grid.cs" />
     <Compile Include="Assets\Scripts\GridModule\TetrisPiece.cs" />
+    <Compile Include="Assets\ToolTipHandler.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -15,8 +15,19 @@ public class TetrisPiece : ScriptableObject
         Flexible
     }
 
-
-    //if 5% chance succeeeds, all resources become flexible.
+    public enum PieceType
+    {
+        RandomNonDot,
+        Random,
+        Dot,
+        I,
+        S,
+        Z,
+        O,
+        T,
+        L,
+        J,
+    }
 
     [System.Serializable]
     public struct Square

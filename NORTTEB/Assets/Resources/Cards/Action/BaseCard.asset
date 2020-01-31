@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
   m_Name: BaseCard
   m_EditorClassIdentifier: 
-  isFullCard: 1
+  isFullCard: 0
   baseCardType: 2
-  cardTier: 1
+  cardTier: 0
   cardName: Volatile Technomechanics
   cardDescription: Chance to increase or decrease your hand size
+  flavourText: FlavourText
   events:
   - eventType: 3
     valueRange: {x: 1, y: 2}
