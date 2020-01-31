@@ -59,8 +59,18 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
         UpdateText();
     }
 
-    void FixedUpdate()
+    public void DoCard()
     {
+        if (card1Displayed)
+        {
+            Card.cardPrimary.DoCardBehaviour();
+        }
+        else
+        {
+            Card.cardSecondary.DoCardBehaviour();
+        }
+
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

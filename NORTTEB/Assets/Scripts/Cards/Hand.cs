@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    private static Hand _instance;
+
+    public static Hand Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     [HideInInspector] public List<CardDisplay> cards = new List<CardDisplay>();
 
@@ -17,7 +33,7 @@ public class Hand : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        UpdateHandSize(5);
+        UpdateHandSize(HandSize);
     }
 
     private void UpdateHandSize(int final)
@@ -51,11 +67,22 @@ public class Hand : MonoBehaviour
         if (translatePer < cardWidth)
         {
             scale.x = translatePer / cardWidth;
+            scale.y = translatePer / cardWidth;
         }
         else
         {
             scale = Vector3.one;
         }
+    }
+
+    public void DiscardCard(int card)
+    {
+        DiscardCard(cards[card]);
+    }
+
+    public void DiscardCard(CardDisplay card)
+    {
+        cards.Remove(card);
     }
 
     public void DrawCard(BaseCard.BaseCardType deckType)

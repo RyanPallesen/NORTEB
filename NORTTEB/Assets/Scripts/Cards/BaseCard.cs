@@ -15,12 +15,12 @@ public class BaseCard : ScriptableObject
 
     public enum EventType
     {
-       HandSizeChange,
-       ResourceUsed, //Removal from bottom
-       ResourceDamaged, //Removal from edges
-       DrawCardType, //Draw from a deck
-       ResourceCard, //Begin placing the shape
-       NixEvent,//When an event of a type occurs, cancel it.
+        HandSizeChange,
+        ResourceUsed, //Removal from bottom
+        ResourceDamaged, //Removal from edges
+        DrawCardType, //Draw from a deck
+        ResourceCard, //Begin placing the shape
+        NixEvent,//When an event of a type occurs, cancel it.
     }
 
     [System.Serializable]
@@ -34,7 +34,7 @@ public class BaseCard : ScriptableObject
         public BaseCardType cardType;
         public TetrisPiece.ResourceType resourceType;
         public EventType eventTypeNix;
-        public TetrisPiece tetrisPiece;
+        public TetrisPiece.PieceType tetrisPiece;
     }
 
     [System.Serializable]
@@ -54,4 +54,136 @@ public class BaseCard : ScriptableObject
 
     public List<Event> events = new List<Event>();
     public List<DelayedEvent> delayedEvents = new List<DelayedEvent>();
+
+    public void DoCardBehaviour()
+    {
+        foreach (Event cardEvent in events)
+        {
+            switch (cardEvent.eventType)
+            {
+                case EventType.HandSizeChange:
+                    ChangeHandSize(cardEvent.valueRange);
+                    break;
+                case EventType.ResourceUsed:
+                    UseResource(cardEvent.resourceType);
+                    break;
+                case EventType.ResourceDamaged:
+                    DamageResource(cardEvent.resourceType);
+                    break;
+                case EventType.DrawCardType:
+                    DrawCardType(cardEvent.cardType, cardEvent.valueRange);
+                    break;
+                case EventType.ResourceCard:
+                    UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType);
+                    break;
+                case EventType.NixEvent:
+                    break;
+            }
+        }
+    }
+
+    public void ChangeHandSize(Vector2 num)
+    {
+        Hand.Instance.HandSize += (int)Random.Range(num.x, num.y);
+        Hand.Instance.RebuildHandPositions();
+    }
+
+    public void UseResource(TetrisPiece.ResourceType resourceType)
+    {
+
+    }
+
+    public void DamageResource(TetrisPiece.ResourceType resourceType)
+    {
+
+    }
+
+    public void DrawCardType(BaseCard.BaseCardType cardType, Vector2 num)
+    {
+        Hand.Instance.DrawCard(cardType);
+    }
+
+    public void UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
+    {
+
+        switch (pieceType)
+        {
+            case TetrisPiece.PieceType.RandomNonDot:
+                UseResourceCard((TetrisPiece.PieceType)Random.Range(3, 9), resourceType);
+                return;
+            case TetrisPiece.PieceType.Random:
+                UseResourceCard((TetrisPiece.PieceType)Random.Range(2, 9), resourceType);
+                return;
+            case TetrisPiece.PieceType.Dot:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/Dot");
+                break;
+            case TetrisPiece.PieceType.I:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/I");
+                break;
+            case TetrisPiece.PieceType.S:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/S");
+                break;
+            case TetrisPiece.PieceType.Z:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/Z");
+                break;
+            case TetrisPiece.PieceType.O:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/O");
+                break;
+            case TetrisPiece.PieceType.T:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/T");
+                break;
+            case TetrisPiece.PieceType.L:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/L");
+                break;
+            case TetrisPiece.PieceType.J:
+                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/J");
+                break;
+        }
+
+        switch (resourceType)
+        {
+            case TetrisPiece.ResourceType.Randomized:
+
+                TetrisPiece.ResourceType primary = (TetrisPiece.ResourceType)Random.Range(1, 3);
+                TetrisPiece.ResourceType secondary = (TetrisPiece.ResourceType)Random.Range(1, 3);
+
+                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                {
+                    if (Random.Range(0, 100) < 50)
+                    {
+                        TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = primary;
+                    }
+                    else
+                    {
+                        TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = secondary;
+                    }
+                }
+
+                break;
+            case TetrisPiece.ResourceType.Air:
+                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                {
+                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Air;
+                }
+                break;
+            case TetrisPiece.ResourceType.Metal:
+                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                {
+                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Metal;
+                }
+                break;
+            case TetrisPiece.ResourceType.Fuel:
+                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                {
+                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Fuel;
+                }
+                break;
+            case TetrisPiece.ResourceType.Flexible:
+                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                {
+                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Flexible;
+                }
+                break;
+        }
+    }
 }

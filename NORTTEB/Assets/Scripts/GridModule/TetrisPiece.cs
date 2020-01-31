@@ -30,7 +30,7 @@ public class TetrisPiece : ScriptableObject
     }
 
     [System.Serializable]
-    public struct Square
+    public class Square
     {
         public int xOffset;
         public int yOffset;

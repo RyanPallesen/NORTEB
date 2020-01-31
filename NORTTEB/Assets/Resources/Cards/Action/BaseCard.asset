@@ -16,10 +16,10 @@ MonoBehaviour:
   baseCardType: 2
   cardTier: 0
   cardName: Volatile Technomechanics
-  cardDescription: Chance to increase or decrease your hand size
-  flavourText: FlavourText
+  cardDescription: '+/-1 '
+  flavourText: Who knows what they're doing to your ship?
   events:
-  - eventType: 3
+  - eventType: 0
     valueRange: {x: 1, y: 2}
     cardType: 2
     resourceType: 0
