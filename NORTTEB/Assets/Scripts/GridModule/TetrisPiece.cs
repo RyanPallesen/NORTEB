@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "CustomPiece", menuName = "Custom/TetrisPiece", order = 1)]
+public class TetrisPiece : ScriptableObject
+{
 
-public class TetrisPiece : ScriptableObject {
-
-    public enum ResourceType
+    public enum ResourceType //note; randomize between two of the existing resources
     {
-    Air,
-    Metal,
-    Fuel
+        Randomized,
+        Air,
+        Metal,
+        Fuel,
+        Flexible
     }
 
-    struct Square
+
+    //if 5% chance succeeeds, all resources become flexible.
+
+    [System.Serializable]
+    public struct Square
     {
-        int xOffset;
-        int yOffset;
+        public int xOffset;
+        public int yOffset;
 
         [HideInInspector] public ResourceType resourceType;
     }
 
+    public List<Square> squares = new List<Square>();
 }

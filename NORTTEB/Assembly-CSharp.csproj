@@ -62,21 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Cards\ActionCard.cs" />
     <Compile Include="Assets\Scripts\Cards\BaseCard.cs" />
-    <Compile Include="Assets\Scripts\Cards\EventCard.cs" />
-    <Compile Include="Assets\Scripts\Cards\ResourceCard.cs" />
     <Compile Include="Assets\Scripts\GridModule\Grid.cs" />
     <Compile Include="Assets\Scripts\GridModule\TetrisPiece.cs" />
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -91,6 +79,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Lightweight.Runtime">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.RenderPipelines.Lightweight.Runtime.dll</HintPath>
@@ -137,8 +128,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>C:/Users/s191204/Documents/GitHub/NORTEB/NORTTEB/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
