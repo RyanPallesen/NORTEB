@@ -22,6 +22,7 @@ public class BaseCard : ScriptableObject
         ResourceCard, //Begin placing the shape
         NixEvent,//When an event of a type occurs, cancel it.
         Junk,//Stays around for one turn
+        Move,
     }
 
     [System.Serializable]
@@ -49,6 +50,7 @@ public class BaseCard : ScriptableObject
     public BaseCardType baseCardType = BaseCardType.Action;
 
     public int cardTier = 1;
+    public int frequency = 0;
     public string cardName = "New Card";
     public string cardDescription = "DescriptionText";
     public string flavourText = "FlavourText";

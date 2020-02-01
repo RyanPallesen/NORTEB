@@ -14,9 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 2
-  cardTier: 1
-  cardName: New Card
-  cardDescription: DescriptionText
-  flavourText: FlavourText
-  events: []
+  cardTier: 0
+  cardName: SuperShroom
+  cardDescription: Gain a T-Shaped flexible card
+  flavourText: Long, skinny, glowing, tasty.
+  events:
+  - eventType: 4
+    valueRange: {x: 0, y: 0}
+    cardType: 0
+    resourceType: 4
+    eventTypeNix: 0
+    tetrisPiece: 7
+  - eventType: 0
+    valueRange: {x: 0, y: 0}
+    cardType: 0
+    resourceType: 0
+    eventTypeNix: 0
+    tetrisPiece: 0
   delayedEvents: []
