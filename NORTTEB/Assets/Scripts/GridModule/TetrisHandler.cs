@@ -22,6 +22,9 @@ public class TetrisHandler : MonoBehaviour
     public GameObject fuelObject;
     public GameObject metalObject;
 
+
+    public List<BaseCard.resourceCache> resources = new List<BaseCard.resourceCache>();
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -41,8 +44,14 @@ public class TetrisHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isPlacing && TetrisPiece)
+        if (resources.Count > 0 && !isPlacing)
         {
+            isPlacing = true;
+            BaseCard.UseResourceCard(resources[0].PieceType, resources[0].ResourceType);
+        }
+
+        if (isPlacing)
+        { 
             tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tetrisObj.transform.Translate(new Vector3(0, 0, 189));
             if (Input.GetKeyDown(KeyCode.D))
@@ -131,7 +140,15 @@ public class TetrisHandler : MonoBehaviour
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
 
-                                        if(GridType == TetrisPiece.ResourceType.Air)
+
+                                        if(CubeType == TetrisPiece.ResourceType.Flexible)
+                                        {
+                                            TetrisPiece.squares[i].resourceType = GridType;
+                                            workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)TetrisPiece.squares[i].resourceType);
+
+                                        }
+
+                                        if (GridType == TetrisPiece.ResourceType.Air)
                                         {
                                             airList.Add(workingTransform.gameObject);
                                         }
@@ -199,6 +216,7 @@ public class TetrisHandler : MonoBehaviour
                     }
 
                     isPlacing = false;
+                    resources.Remove(resources[0]);                    
                 }
 
             }

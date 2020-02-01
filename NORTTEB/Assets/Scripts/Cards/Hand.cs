@@ -159,38 +159,82 @@ public class Hand : MonoBehaviour
 
     public void EndTurn()
     {
-        foreach(CardDisplay cardDisplay in cards)
+        if (TetrisHandler.Instance.resources.Count < 1)
         {
-            if(cardDisplay.Card.cardPrimary.baseCardType == BaseCard.BaseCardType.Event)
+
+            List<CardDisplay> discards = new List<CardDisplay>();
+
+            foreach (CardDisplay cardDisplay in cards)
             {
-                cardDisplay.DoCard();
+
+
+                if (cardDisplay.Card.cardPrimary.baseCardType == BaseCard.BaseCardType.Event)
+                {
+                    cardDisplay.DoCard();
+                }
+
+                foreach (BaseCard.DelayedEvent Devent in cardDisplay.Card.cardPrimary.delayedEvents)
+                {
+                    if (Devent.eventType == BaseCard.EventType.Junk)
+                    {
+                        discards.Add(cardDisplay);
+                    }
+                    if (cardDisplay.Card.cardPrimary.timeInHand == Devent.turnDelay)
+                    {
+                        cardDisplay.Card.cardPrimary.DoCardBehaviour();
+
+                    }
+
+                }
+
+                foreach (BaseCard.DelayedEvent Devent in cardDisplay.Card.cardSecondary.delayedEvents)
+                {
+                    if (Devent.eventType == BaseCard.EventType.Junk)
+                    {
+                        discards.Add(cardDisplay);
+                    }
+
+                    if (cardDisplay.Card.cardSecondary.timeInHand == Devent.turnDelay)
+                    {
+                        cardDisplay.Card.cardSecondary.DoCardBehaviour();
+                    }
+
+                }
+
+                cardDisplay.Card.cardPrimary.timeInHand++;
+                cardDisplay.Card.cardSecondary.timeInHand++;
             }
-        }
-
-        Movement++;
-        Turn++;
 
 
-        if (Movement > 0 && currentTier < 1)
-        {
-            currentTier = 1;
-        }
-
-        if (Movement > 5 && currentTier < 2)
-        {
-            currentTier = 2;
-        }
-
-        if (Movement > 15 && currentTier < 3)
-        {
-            currentTier = 2;
-        }
+            for(int i = 0; i < discards.Count; i++)
+            {
+                DiscardCard(discards[i]);
+            }
+            Movement++;
+            Turn++;
 
 
+            if (Movement > 0 && currentTier < 1)
+            {
+                currentTier = 1;
+            }
 
-        for (int i = cards.Count; i < HandSize; i++)
-        {
-            DrawCard();
+            if (Movement > 5 && currentTier < 2)
+            {
+                currentTier = 2;
+            }
+
+            if (Movement > 15 && currentTier < 3)
+            {
+                currentTier = 2;
+            }
+
+
+
+            for (int i = cards.Count; i < HandSize; i++)
+            {
+                DrawCard();
+            }
         }
     }
 }
