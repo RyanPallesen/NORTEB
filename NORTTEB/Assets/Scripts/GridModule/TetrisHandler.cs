@@ -49,9 +49,22 @@ public class TetrisHandler : MonoBehaviour {
 
             if(Input.GetMouseButton(0))
             {
-                foreach(TetrisPiece.Square square in TetrisPiece.squares)
+                for(int i = 0; i < tetrisObj.transform.childCount; i++)
                 {
                     //raycast backwards to see if there is a grid square behind
+
+                    Transform workingTransform = tetrisObj.transform.GetChild(i);
+
+                    if(Physics.Raycast(workingTransform.position,new Vector3(0,0,1), out RaycastHit hit))
+                    {
+                        if(hit.collider.transform.parent.GetComponent<GridPiece>())
+                        {
+                            workingTransform.position = hit.collider.transform.position;
+                            isPlacing = false;
+
+                        }
+                    }
+
                 }
             }
 
