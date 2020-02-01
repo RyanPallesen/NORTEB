@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1272527942504564123}
   - component: {fileID: 4956630768181354842}
   - component: {fileID: 5345161445659558464}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 8798867614967079862}
   - component: {fileID: 4316138142789190363}
   - component: {fileID: 5085151000803429907}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HalfCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.3, y: 131}
+  m_AnchoredPosition: {x: 0.30000305, y: 131}
   m_SizeDelta: {x: 374, y: 233.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8798867614967079862
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4538858294042190963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 2434757022837148711}
   - component: {fileID: 5164056738457271027}
   - component: {fileID: 3019119872406673704}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
