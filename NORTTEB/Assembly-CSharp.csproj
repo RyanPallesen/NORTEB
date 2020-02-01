@@ -55,7 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+
      <Compile Include="Assets\Scripts\ActivateUI.cs" />
+
      <Compile Include="Assets\Scripts\Cards\BaseCard.cs" />
      <Compile Include="Assets\Scripts\Cards\Card.cs" />
      <Compile Include="Assets\Scripts\Cards\CardDisplay.cs" />
