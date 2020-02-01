@@ -10,32 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
-  m_Name: 2.Shower3
+  m_Name: 3.Damage4_Air
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
-  cardTier: 2
+  cardTier: 3
   frequency: 3
-  cardName: Meteorite Shower
-  cardDescription: 3 damage to each system
-  flavourText: A smattering of pebbles peppers your hull
+  cardName: Damage
+  cardDescription: 4 AIR damage
+  flavourText: A stray rock hits your air supply
   events:
   - eventType: 2
-    valueRange: {x: 3, y: 3}
+    valueRange: {x: 4, y: 4}
     cardType: 1
     resourceType: 1
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 0
-    valueRange: {x: 3, y: 3}
-    cardType: 1
-    resourceType: 2
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 0
-    valueRange: {x: 3, y: 3}
-    cardType: 1
-    resourceType: 3
     eventTypeNix: 0
     tetrisPiece: 0
   delayedEvents: []
