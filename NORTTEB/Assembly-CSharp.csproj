@@ -64,6 +64,8 @@
      <Compile Include="Assets\Scripts\GridModule\GridPiece.cs" />
      <Compile Include="Assets\Scripts\GridModule\TetrisHandler.cs" />
      <Compile Include="Assets\Scripts\GridModule\TetrisPiece.cs" />
+     <Compile Include="Assets\Scripts\LoadScene.cs" />
+     <Compile Include="Assets\Scripts\QuitApplication.cs" />
      <Compile Include="Assets\Scripts\ToolTipHandler.cs" />
      <Compile Include="Assets\TetrisTag.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
