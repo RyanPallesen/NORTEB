@@ -7,6 +7,7 @@ public class TetrisHandler : MonoBehaviour {
 
     public bool isPlacing = false;
     public TetrisPiece TetrisPiece;
+    public GameObject tetrisObj;
     private static TetrisHandler _instance;
 
     public static TetrisHandler Instance { get { return _instance; } }
@@ -24,15 +25,27 @@ public class TetrisHandler : MonoBehaviour {
         }
     }
     
-    void Start () {
+    void Start () 
+    {
 		
 	}
 	
 	
-	void Update () {
+	void Update ()
+    {
 		if(isPlacing && TetrisPiece)
         {
+            tetrisObj.transform.position = Input.mousePosition;
 
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                tetrisObj.transform.Rotate(new Vector3(0, 0, -90));
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                tetrisObj.transform.Rotate(new Vector3(0, 0, 90));
+            }
         }
 	}
 }
