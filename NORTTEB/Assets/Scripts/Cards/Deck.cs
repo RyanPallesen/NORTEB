@@ -36,7 +36,10 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
                         keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
 
-                    keyValuePairs[card.cardTier].Add(card);
+                    for (int i = -1; i < card.frequency; i++)
+                    {
+                        keyValuePairs[card.cardTier].Add(card);
+                    }
                 }
             }
 
@@ -50,7 +53,10 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
                         keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
 
-                    keyValuePairs[card.cardTier].Add(card);
+                    for (int i = -1; i < card.frequency; i++)
+                    {
+                        keyValuePairs[card.cardTier].Add(card);
+                    }
                 }
             }
 
@@ -64,21 +70,34 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
                         keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
 
-                    keyValuePairs[card.cardTier].Add(card);
+                    for (int i = -1; i < card.frequency; i++)
+                    {
+                        keyValuePairs[card.cardTier].Add(card);
+                    }
                 }
             }
-
         }
-
-
     }
 
     public GameObject GetCard(int tier)
     {
+        Debug.Log("Drawing card from tier " + tier);
+
         Card card = new Card();
 
         card.cardPrimary = GetCardOfTier(tier);
         card.cardSecondary = GetCardOfTier(tier);
+
+        if(card.cardPrimary.isFullCard)
+        {
+            card.cardSecondary = card.cardPrimary;
+        }
+
+        if (card.cardSecondary.isFullCard)
+        {
+            card.cardPrimary = card.cardSecondary;
+        }
+
         card.cardTier = tier;
 
         GameObject go = Instantiate(cardPrefab, transform);
@@ -90,8 +109,10 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
 
     public BaseCard GetCardOfTier(int tier)
     {
+
         List<BaseCard> cards = keyValuePairs[tier];
         int random = Random.Range(0, cards.Count);
+
         return (cards[random]);
     }
 

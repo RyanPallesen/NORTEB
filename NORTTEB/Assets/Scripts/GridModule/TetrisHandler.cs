@@ -18,6 +18,10 @@ public class TetrisHandler : MonoBehaviour
     public List<GameObject> fuelList = new List<GameObject>();
     public List<GameObject> metalList = new List<GameObject>();
 
+    public GameObject airObject;
+    public GameObject fuelObject;
+    public GameObject metalObject;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -106,17 +110,9 @@ public class TetrisHandler : MonoBehaviour
 
                         Transform workingTransform = tetrisObj.transform.GetChild(i);
 
-
-
-
                         if (Physics.Raycast(workingTransform.position, new Vector3(0, 0, 1), out RaycastHit hit))
                         {
                             TetrisPiece.ResourceType CubeType = TetrisPiece.squares[i].resourceType;
-
-
-                            
-
-
 
                             if (hit.collider.transform.parent.GetComponent<GridPiece>())
                             {
