@@ -16,11 +16,12 @@ public class BaseCard : ScriptableObject
     public enum EventType
     {
         HandSizeChange,
-        ResourceUsed, //Removal from bottom
+        ConditionalDamage, //Supply X tetris piece or take Y damage
         ResourceDamaged, //Removal from edges
         DrawCardType, //Draw from a deck
         ResourceCard, //Begin placing the shape
         NixEvent,//When an event of a type occurs, cancel it.
+        Junk,//Stays around for one turn
     }
 
     [System.Serializable]
@@ -64,8 +65,8 @@ public class BaseCard : ScriptableObject
                 case EventType.HandSizeChange:
                     ChangeHandSize(cardEvent.valueRange);
                     break;
-                case EventType.ResourceUsed:
-                    UseResource(cardEvent.resourceType);
+                case EventType.ConditionalDamage:
+
                     break;
                 case EventType.ResourceDamaged:
                     DamageResource(cardEvent.resourceType);
@@ -77,6 +78,8 @@ public class BaseCard : ScriptableObject
                     UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType);
                     break;
                 case EventType.NixEvent:
+                    break;
+                case EventType.Junk:
                     break;
             }
         }
@@ -206,7 +209,7 @@ public class BaseCard : ScriptableObject
 
         foreach(TetrisPiece.Square square in TetrisHandler.Instance.TetrisPiece.squares)
         {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject cube = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/TetrisCube"));
 
             cube.transform.SetParent(ParentObject.transform);
             
