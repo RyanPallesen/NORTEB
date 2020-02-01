@@ -13,10 +13,22 @@ MonoBehaviour:
   m_Name: Custom Card
   m_EditorClassIdentifier: 
   isFullCard: 0
-  baseCardType: 2
-  cardTier: 1
-  cardName: New Card
-  cardDescription: DescriptionText
+  baseCardType: 0
+  cardTier: 0
+  cardName: Lost and found
+  cardDescription: Draw 1 Card, Play a metal Dot
   flavourText: FlavourText
-  events: []
+  events:
+  - eventType: 2
+    valueRange: {x: 0, y: 0}
+    cardType: 0
+    resourceType: 3
+    eventTypeNix: 0
+    tetrisPiece: 2
+  - eventType: 3
+    valueRange: {x: 1, y: 1}
+    cardType: 0
+    resourceType: 0
+    eventTypeNix: 0
+    tetrisPiece: 0
   delayedEvents: []
