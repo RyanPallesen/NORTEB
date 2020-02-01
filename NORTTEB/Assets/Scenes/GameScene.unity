@@ -1196,7 +1196,12 @@ MonoBehaviour:
   isPlacing: 0
   TetrisPiece: {fileID: 0}
   tetrisObj: {fileID: 0}
-  airGrid: {fileID: 0}
+  airList: []
+  fuelList: []
+  metalList: []
+  airObject: {fileID: 1189846672}
+  fuelObject: {fileID: 1782097345}
+  metalObject: {fileID: 325161205}
 --- !u!222 &238939697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3455,7 +3460,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 700, y: 1400}
+  m_SizeDelta: {x: 700, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &887108441
 MonoBehaviour:
@@ -3471,11 +3476,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75dc7c2397ec26b429fd698f6e080499, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2033593a1ef2e6145a2c1ca88513cad9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4080,8 +4085,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 929, y: -364}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 910, y: -364}
+  m_SizeDelta: {x: 64, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057936087
 MonoBehaviour:
@@ -4125,7 +4130,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1057936088}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2035110164}
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1057936088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4476,7 +4492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189846672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.85, y: 3.37, z: 190}
+  m_LocalPosition: {x: 18.85, y: 1.35, z: 190}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 905611019}
@@ -7273,18 +7289,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 71
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 72
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: E N D
 --- !u!222 &1843845581
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8262,6 +8278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b794a1a2046ab2e41911adc65b402f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Movement: 0
+  Turn: 0
+  currentTier: 0
   cards: []
   HandSize: 4
   prefabHandHolder: {fileID: 1190218661663180168, guid: a98b5777120ee0a4990797b18cb395da,

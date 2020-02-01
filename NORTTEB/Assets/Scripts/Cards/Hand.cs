@@ -10,6 +10,7 @@ public class Hand : MonoBehaviour
 
     public int Movement;
     public int Turn;
+    public int currentTier = 1;
 
     private void Awake()
     {
@@ -138,9 +139,9 @@ public class Hand : MonoBehaviour
     {
         if (cards.Count <= HandSize)
         {
-            GameObject card = Deck.Instance.GetCard(0);
+            GameObject card = Deck.Instance.GetCard(Hand.Instance.currentTier);
             
-            CardDisplay drawnCard = card.GetComponentInChildren<CardDisplay>(); ;
+            CardDisplay drawnCard = card.GetComponentInChildren<CardDisplay>();
 
             cards.Add(drawnCard);
             RebuildHandPositions();
@@ -166,13 +167,30 @@ public class Hand : MonoBehaviour
             }
         }
 
-        for(int i=cards.Count; i< HandSize; i++)
+        Movement++;
+        Turn++;
+
+
+        if (Movement > 0 && currentTier < 1)
         {
-            DrawCard();
+            currentTier = 1;
+        }
+
+        if (Movement > 5 && currentTier < 2)
+        {
+            currentTier = 2;
+        }
+
+        if (Movement > 15 && currentTier < 3)
+        {
+            currentTier = 2;
         }
 
 
-        Movement++;
-        Turn++;
+
+        for (int i = cards.Count; i < HandSize; i++)
+        {
+            DrawCard();
+        }
     }
 }
