@@ -11,9 +11,14 @@ public class TetrisHandler : MonoBehaviour
     public GameObject tetrisObj;
     private static TetrisHandler _instance;
     private bool isValidPlacement;
+    public List<GameObject> airList;
+    public List<GameObject> metalList;
+    public List<GameObject> fuelList;
+    public GridPiece airGrid;
+    public GridPiece metalGrid;
+    public GridPiece fuelGrid;
 
     public static TetrisHandler Instance { get { return _instance; } }
-
 
     private void Awake()
     {
@@ -94,26 +99,15 @@ public class TetrisHandler : MonoBehaviour
 
                 if (isValidPlacement)
                 {
-
-
-
                     for (int i = 0; i < tetrisObj.transform.childCount; i++)
                     {
                         //raycast backwards to see if there is a grid square behind
 
                         Transform workingTransform = tetrisObj.transform.GetChild(i);
 
-
-
-
                         if (Physics.Raycast(workingTransform.position, new Vector3(0, 0, 1), out RaycastHit hit))
                         {
-                            TetrisPiece.ResourceType CubeType = TetrisPiece.squares[i].resourceType;
-
-
-                            
-
-
+                            TetrisPiece.ResourceType CubeType = TetrisPiece.squares[i].resourceType;                   
 
                             if (hit.collider.transform.parent.GetComponent<GridPiece>())
                             {
@@ -131,6 +125,22 @@ public class TetrisHandler : MonoBehaviour
                                     else
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
+
+                                        if(GridType == TetrisPiece.ResourceType.Air)
+                                        {
+                                            airList.Add(workingTransform.gameObject);
+                                            Debug.Log("Air element added");
+                                        }
+                                        else if(GridType == TetrisPiece.ResourceType.Metal)
+                                        {
+                                            metalList.Add(workingTransform.gameObject);
+                                            Debug.Log("Metal element added");
+                                        }
+                                        else if(GridType == TetrisPiece.ResourceType.Fuel)
+                                        {
+                                            fuelList.Add(workingTransform.gameObject);
+                                            Debug.Log("Fuel element added");
+                                        }
                                     }
                                     //place it
                                 }
@@ -148,14 +158,30 @@ public class TetrisHandler : MonoBehaviour
                                 if (!hit.collider.transform.parent.GetComponent<GridPiece>())
                                 {
                                     Destroy(workingTransform.gameObject);
+
                                     if (hit.collider.GetComponent<TetrisTag>().ResourceType != CubeType)
                                     {
+
+                                        if (airList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            airList.Remove(hit.collider.transform.gameObject);
+                                            Debug.Log("Air element added");
+                                        }
+                                        else if (metalList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            metalList.Remove(hit.collider.transform.gameObject);
+                                            Debug.Log("Air element added");
+                                        }
+                                        else if (fuelList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            fuelList.Remove(hit.collider.transform.gameObject);
+                                            Debug.Log("Air element added");
+                                        }
+
                                         Destroy(hit.collider.transform.gameObject);
+
                                     }
-                                    else // hit somethign with same resource type.
-                                    {
-                                        workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
-                                    }
+
                                 }
                                 //if gridtype != resourcetype and grid is empty, destroy cube
                                 else if (hit.collider.transform.parent.GetComponent<GridPiece>())
@@ -163,9 +189,6 @@ public class TetrisHandler : MonoBehaviour
                                     Destroy(workingTransform.gameObject);
                                 }
                             };
-
-
-
                         }
                     }
 

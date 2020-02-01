@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1197,6 +1197,12 @@ MonoBehaviour:
   isPlacing: 0
   TetrisPiece: {fileID: 0}
   tetrisObj: {fileID: 0}
+  airList: []
+  metalList: []
+  fuelList: []
+  airGrid: {fileID: 1189846673}
+  metalGrid: {fileID: 325161207}
+  fuelGrid: {fileID: 1782097347}
 --- !u!1 &261635342
 GameObject:
   m_ObjectHideFlags: 0
