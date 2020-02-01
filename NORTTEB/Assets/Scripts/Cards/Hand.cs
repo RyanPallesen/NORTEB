@@ -8,6 +8,8 @@ public class Hand : MonoBehaviour
 
     public static Hand Instance { get { return _instance; } }
 
+    public int Movement;
+    public int Turn;
 
     private void Awake()
     {
@@ -152,5 +154,25 @@ public class Hand : MonoBehaviour
         {
             DrawCard();
         }
+    }
+
+    public void EndTurn()
+    {
+        foreach(CardDisplay cardDisplay in cards)
+        {
+            if(cardDisplay.Card.cardPrimary.baseCardType == BaseCard.BaseCardType.Event)
+            {
+                cardDisplay.DoCard();
+            }
+        }
+
+        for(int i=cards.Count; i< HandSize; i++)
+        {
+            DrawCard();
+        }
+
+
+        Movement++;
+        Turn++;
     }
 }

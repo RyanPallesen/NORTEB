@@ -14,6 +14,9 @@ public class TetrisHandler : MonoBehaviour
 
     public static TetrisHandler Instance { get { return _instance; } }
 
+    public List<GameObject> airList = new List<GameObject>();
+    public List<GameObject> fuelList = new List<GameObject>();
+    public List<GameObject> metalList = new List<GameObject>();
 
     private void Awake()
     {
@@ -131,6 +134,19 @@ public class TetrisHandler : MonoBehaviour
                                     else
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
+
+                                        if(GridType == TetrisPiece.ResourceType.Air)
+                                        {
+                                            airList.Add(workingTransform.gameObject);
+                                        }
+                                        else if (GridType == TetrisPiece.ResourceType.Fuel)
+                                        {
+                                            fuelList.Add(workingTransform.gameObject);
+
+                                        }
+                                        else if (GridType == TetrisPiece.ResourceType.Metal)
+                                            metalList.Add(workingTransform.gameObject);
+
                                     }
                                     //place it
                                 }
@@ -151,10 +167,27 @@ public class TetrisHandler : MonoBehaviour
                                     if (hit.collider.GetComponent<TetrisTag>().ResourceType != CubeType)
                                     {
                                         Destroy(hit.collider.transform.gameObject);
+
+                                        if (airList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            airList.Remove(hit.collider.transform.gameObject);
+                                        }
+                                        else if(fuelList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            fuelList.Remove(hit.collider.transform.gameObject);
+                                        }
+                                        else if (metalList.Contains(hit.collider.transform.gameObject))
+                                        {
+                                            metalList.Remove(hit.collider.transform.gameObject);
+                                        }
                                     }
                                     else // hit somethign with same resource type.
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
+
+
+
+
                                     }
                                 }
                                 //if gridtype != resourcetype and grid is empty, destroy cube

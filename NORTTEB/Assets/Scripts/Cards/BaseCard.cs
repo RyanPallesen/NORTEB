@@ -23,6 +23,7 @@ public class BaseCard : ScriptableObject
         NixEvent,//When an event of a type occurs, cancel it.
         Junk,//Stays around for one turn
         Move,
+        ShuttleDamaged//Permanently destroy a resource-placing square
     }
 
     [System.Serializable]
@@ -82,6 +83,9 @@ public class BaseCard : ScriptableObject
                 case EventType.NixEvent:
                     break;
                 case EventType.Junk:
+                    break;
+                case EventType.Move:
+                    Hand.Instance.Movement += (int)Random.Range(cardEvent.valueRange.x, cardEvent.valueRange.y);
                     break;
             }
         }
