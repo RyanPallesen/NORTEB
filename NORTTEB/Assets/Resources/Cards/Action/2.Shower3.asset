@@ -15,10 +15,10 @@ MonoBehaviour:
   isFullCard: 1
   baseCardType: 1
   cardTier: 2
-  frequency: 1
+  frequency: 3
   cardName: Meteorite Shower
-  cardDescription: Meteorite Shower
-  flavourText: FlavourText
+  cardDescription: 3 damage to each system
+  flavourText: A smattering of pebbles peppers your hull
   events:
   - eventType: 2
     valueRange: {x: 3, y: 3}

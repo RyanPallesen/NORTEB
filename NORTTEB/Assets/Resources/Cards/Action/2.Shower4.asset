@@ -15,7 +15,7 @@ MonoBehaviour:
   isFullCard: 1
   baseCardType: 1
   cardTier: 2
-  frequency: 3
+  frequency: 9
   cardName: Meteorite Shower
   cardDescription: Meteorite Shower
   flavourText: FlavourText
