@@ -17,8 +17,8 @@ MonoBehaviour:
   cardTier: 3
   frequency: 6
   cardName: Meteorite Shower
-  cardDescription: Meteorite Shower
-  flavourText: FlavourText
+  cardDescription: 4 damage to each system
+  flavourText: A shower of rocks shakes your hull
   events:
   - eventType: 2
     valueRange: {x: 4, y: 4}
