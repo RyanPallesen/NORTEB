@@ -73,7 +73,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 15}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 275.1, y: 52.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7160124488669058427
@@ -363,7 +363,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d9bee579da83b304b982c88643c6afe4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1da92cc06e069b04da78ad1c32d4f24d, type: 3}
   m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -403,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438783523178937666, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
@@ -467,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -126
+      value: -144
       objectReference: {fileID: 0}
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
@@ -544,6 +549,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfCard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4538858294042190963, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5345161445659558464, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -568,6 +578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632649162018041839, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a496fc6022cb3844b10d19daf6763a7, type: 3}
@@ -612,6 +627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438783523178937666, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
@@ -676,7 +696,7 @@ PrefabInstance:
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 131
+      value: 138
       objectReference: {fileID: 0}
     - target: {fileID: 1599695447460347118, guid: 6a496fc6022cb3844b10d19daf6763a7,
         type: 3}
@@ -727,6 +747,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HalfCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538858294042190963, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632649162018041839, guid: 6a496fc6022cb3844b10d19daf6763a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a496fc6022cb3844b10d19daf6763a7, type: 3}
