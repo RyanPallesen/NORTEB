@@ -215,6 +215,7 @@ public class BaseCard : ScriptableObject
             
             cube.transform.localPosition = new Vector3(square.yOffset, square.xOffset);
 
+            cube.GetComponent<Renderer>().material.SetFloat("_Type", (int)square.resourceType);
            
         }
 
