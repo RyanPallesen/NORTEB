@@ -13,7 +13,7 @@ public class Hand : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -48,21 +48,16 @@ public class Hand : MonoBehaviour
         RebuildHandPositions();
     }
 
+    public void UpdateHandSize()
+    {
+        UpdateHandSize(HandSize);
+    }
+
     public void RebuildHandPositions()
     {
         float translatePer = 1420 / HandSize;
 
         float currentTranslation = -(1420 / 2);
-
-        currentTranslation += translatePer / 2;
-        for (int i = 0; i < HandSize; i++)
-        {
-            GameObject newGameObject = Instantiate<GameObject>(prefabHandHolder, transform);
-
-            (newGameObject.transform as RectTransform).localPosition = (new Vector3(currentTranslation, 0, 0));
-            currentTranslation += translatePer;
-            positions.Add(newGameObject);
-        }
 
         if (translatePer < cardWidth)
         {
@@ -73,6 +68,56 @@ public class Hand : MonoBehaviour
         {
             scale = Vector3.one;
         }
+
+
+
+        currentTranslation += translatePer / 2;
+        for (int i = 0; i < HandSize; i++)
+        {
+
+            GameObject newGameObject = null;
+
+            if (positions.Count > i && positions[i])
+            {
+                newGameObject = positions[i];
+            }
+            else
+            {
+                newGameObject = Instantiate<GameObject>(prefabHandHolder, transform);
+                positions.Add(newGameObject);
+
+            }
+
+            (newGameObject.transform as RectTransform).localPosition = (new Vector3(currentTranslation, 0, 0));
+            currentTranslation += translatePer;
+        }
+
+       
+        for(int i =0; i < cards.Count; i++)
+        {
+            if (positions.Count > i)
+            {
+                cards[i].transform.parent.SetParent(positions[i].transform,false);
+                cards[i].transform.localPosition = Vector3.zero;
+                cards[i].transform.localScale = scale;
+            }
+        }
+
+
+    }
+
+    public void DiscardCard(BaseCard.BaseCardType cardType)
+    {
+        foreach(CardDisplay cardDisplay in cards)
+        {
+            if (cardDisplay.Card.cardPrimary.baseCardType == cardType)
+            {
+                DiscardCard(cardDisplay);
+
+                return;
+            }
+        }
+
     }
 
     public void DiscardCard(int card)
@@ -83,50 +128,29 @@ public class Hand : MonoBehaviour
     public void DiscardCard(CardDisplay card)
     {
         cards.Remove(card);
+        Destroy(card.transform.parent.gameObject);
+        RebuildHandPositions();
     }
 
-    public void DrawCard(BaseCard.BaseCardType deckType)
+    public void DrawCard()
     {
-        GameObject card = null;
-        CardDisplay drawnCard = null;
-
-        switch (deckType)
+        if (cards.Count <= HandSize)
         {
-            case BaseCard.BaseCardType.Resource:
-                card = (Deck.Resource.GetCard(0));
-                break;
-            case BaseCard.BaseCardType.Event:
-                card = (Deck.Event.GetCard(0));
-                break;
-            case BaseCard.BaseCardType.Action:
-                card = (Deck.Action.GetCard(0));
-                break;
+            GameObject card = Deck.Instance.GetCard(0);
+            
+            CardDisplay drawnCard = card.GetComponentInChildren<CardDisplay>(); ;
+
+            cards.Add(drawnCard);
+            RebuildHandPositions();
         }
-
-        drawnCard = card.GetComponentInChildren<CardDisplay>();
-
-        card.transform.parent = positions[cards.Count].transform;
-        card.transform.localPosition = Vector3.zero;
-        card.transform.localScale = scale;
-
-        cards.Add(drawnCard);
-
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            DrawCard(BaseCard.BaseCardType.Action);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            DrawCard(BaseCard.BaseCardType.Event);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DrawCard(BaseCard.BaseCardType.Resource);
+            DrawCard();
         }
     }
 }
