@@ -16,13 +16,13 @@ MonoBehaviour:
   baseCardType: 0
   cardTier: 0
   cardName: Mushroom Harvesting
-  cardDescription: Oh goodie, a mushroom!
-  flavourText: FlavourText
+  cardDescription: O-shape Random Resource
+  flavourText: Why's it a giant cube?
   events:
-  - eventType: 5
+  - eventType: 4
     valueRange: {x: 0, y: 0}
     cardType: 0
     resourceType: 0
     eventTypeNix: 0
-    tetrisPiece: {fileID: 11400000, guid: b78216f997a8d3c4cbd4cda2fd6a8b5c, type: 2}
+    tetrisPiece: 6
   delayedEvents: []

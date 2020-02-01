@@ -162,8 +162,8 @@ public class BaseCard : ScriptableObject
         {
             case TetrisPiece.ResourceType.Randomized:
 
-                TetrisPiece.ResourceType primary = (TetrisPiece.ResourceType)Random.Range(1, 3);
-                TetrisPiece.ResourceType secondary = (TetrisPiece.ResourceType)Random.Range(1, 3);
+                TetrisPiece.ResourceType primary = (TetrisPiece.ResourceType)Random.Range(1, 4);
+                TetrisPiece.ResourceType secondary = (TetrisPiece.ResourceType)Random.Range(1, 4);
 
                 for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
                 {
@@ -216,6 +216,7 @@ public class BaseCard : ScriptableObject
             cube.transform.localPosition = new Vector3(square.yOffset, square.xOffset);
 
             cube.GetComponent<Renderer>().material.SetFloat("_Type", (int)square.resourceType);
+            cube.GetComponent<TetrisTag>().ResourceType = square.resourceType;
            
         }
 
