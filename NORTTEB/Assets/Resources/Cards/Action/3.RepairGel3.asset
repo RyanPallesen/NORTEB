@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
-  m_Name: 2.Micro-Meteorite Strike!
+  m_Name: 3.RepairGel3
   m_EditorClassIdentifier: 
   isFullCard: 1
-  baseCardType: 1
-  cardTier: 2
-  frequency: 6
-  cardName: Micro-Meteorite Strike!
-  cardDescription: A tiny meteorite punches through your ship!
-  flavourText: We can seal the hole, but repair is impossible
+  baseCardType: 0
+  cardTier: 3
+  frequency: 12
+  cardName: Repair Gel
+  cardDescription: Repair 3 holes
+  flavourText: This flexible gel can patch holes anywhere on your ship
   events:
-  - eventType: 8
-    valueRange: {x: 1, y: 1}
-    cardType: 1
-    resourceType: 0
+  - eventType: 4
+    valueRange: {x: 3, y: 3}
+    cardType: 0
+    resourceType: 4
     eventTypeNix: 0
     tetrisPiece: 2
   delayedEvents: []
