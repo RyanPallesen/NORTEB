@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
-  m_Name: Card3
+  m_Name: Card4
   m_EditorClassIdentifier: 
   isFullCard: 0
-  baseCardType: 0
+  baseCardType: 2
   cardTier: 0
-  cardName: Mushroom Harvesting
-  cardDescription: Oh goodie, a mushroom!
+  cardName: Test
+  cardDescription: Draw 1 Action
   flavourText: FlavourText
   events:
-  - eventType: 5
-    valueRange: {x: 0, y: 0}
-    cardType: 0
+  - eventType: 3
+    valueRange: {x: 1, y: 1}
+    cardType: 2
     resourceType: 0
     eventTypeNix: 0
-    tetrisPiece: {fileID: 11400000, guid: b78216f997a8d3c4cbd4cda2fd6a8b5c, type: 2}
+    tetrisPiece: 0
   delayedEvents: []

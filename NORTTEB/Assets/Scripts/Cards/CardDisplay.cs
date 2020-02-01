@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardDisplay : MonoBehaviour, IPointerEnterHandler
+public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     public TextMeshProUGUI card1Title;
     public TextMeshProUGUI card1Description;
@@ -18,11 +18,11 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        if(Card.cardPrimary.isFullCard)
+        if (Card.cardPrimary.isFullCard)
         {
             Card.cardSecondary = Card.cardPrimary;
         }
-        else if(Card.cardSecondary.isFullCard)
+        else if (Card.cardSecondary.isFullCard)
         {
             Card.cardPrimary = Card.cardSecondary;
         }
@@ -30,24 +30,31 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
 
     public bool card1Displayed = true;
 
-    public Card Card { get => card; set {card = value; UpdateText(); } }
+    public Card Card { get => card; set { card = value; UpdateText(); } }
 
     public void UpdateText()
     {
-        card1Title.text = Card.cardPrimary.cardName;
-        card1Description.text = Card.cardPrimary.cardDescription;
-
-        card2Title.text = Card.cardSecondary.cardName;
-        card2Description.text = Card.cardSecondary.cardDescription;
-
         if (card1Displayed)
         {
             cardType.text = Card.cardPrimary.baseCardType.ToString();
+
+            card1Title.text = Card.cardPrimary.cardName;
+            card1Description.text = Card.cardPrimary.cardDescription;
+
+            card2Title.text = Card.cardSecondary.cardName;
+            card2Description.text = Card.cardSecondary.cardDescription;
         }
         else
         {
-            cardType.text = Card.cardSecondary.baseCardType.ToString();
+            cardType.text = Card.cardPrimary.baseCardType.ToString();
+
+            card2Title.text = Card.cardPrimary.cardName;
+            card2Description.text = Card.cardPrimary.cardDescription;
+
+            card1Title.text = Card.cardSecondary.cardName;
+            card1Description.text = Card.cardSecondary.cardDescription;
         }
+
 
 
     }
@@ -55,7 +62,7 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
     public void RotateCard()
     {
         card1Displayed = !card1Displayed;
-        transform.Rotate(new Vector3(0, 0, 180));
+        //transform.Rotate(new Vector3(0, 0, 180));
         UpdateText();
     }
 
@@ -70,7 +77,7 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
             Card.cardSecondary.DoCardBehaviour();
         }
 
-
+        Hand.Instance.DiscardCard(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -78,12 +85,24 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler
         if (card1Displayed)
         {
             ToolTipHandler.Instance.textmesh.text = Card.cardPrimary.flavourText;
-
         }
         else
         {
             ToolTipHandler.Instance.textmesh.text = Card.cardSecondary.flavourText;
-
         }
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            DoCard();
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            RotateCard();
+        }
+
+    }
+
 }

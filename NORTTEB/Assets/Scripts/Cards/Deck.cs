@@ -5,101 +5,70 @@ using UnityEngine.EventSystems;
 
 public class Deck : MonoBehaviour, IPointerEnterHandler
 {
-    public BaseCard.BaseCardType DeckType;
     public GameObject cardPrefab;
 
     public Dictionary<int, List<BaseCard>> keyValuePairs = new Dictionary<int, List<BaseCard>>();
 
 
+    public static Deck Instance { get { return _instance; } }
 
-    private static readonly Deck[] _instance = new Deck[3];
-
-    public static Deck Resource { get { return _instance[0]; } }
-    public static Deck Event { get { return _instance[1]; } }
-    public static Deck Action { get { return _instance[2]; } }
+    private static Deck _instance;
 
 
     private void Awake()
     {
-        switch (DeckType)
+
+        if (_instance != null && _instance != this)
         {
-            case BaseCard.BaseCardType.Resource:
-                if (_instance[0] != null && _instance[0] != this)
-                {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    _instance[0] = this;
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
 
 
-                    foreach (ScriptableObject @object in Resources.LoadAll("Resources/Cards/Resource"))
+            foreach (ScriptableObject @object in Resources.LoadAll("Cards/Resource"))
+            {
+                BaseCard card = @object as BaseCard;
+                if (card)
+                {
+                    if (!keyValuePairs.ContainsKey(card.cardTier))
                     {
-                        BaseCard card = @object as BaseCard;
-                        if (card)
-                        {
-                            if (!keyValuePairs.ContainsKey(card.cardTier))
-                            {
-                                keyValuePairs[card.cardTier] = new List<BaseCard>();
-                            }
-
-                            keyValuePairs[card.cardTier].Add(card);
-                        }
+                        keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
+
+                    keyValuePairs[card.cardTier].Add(card);
                 }
-                break;
-            case BaseCard.BaseCardType.Event:
-                if (_instance[1] != null && _instance[1] != this)
+            }
+
+            foreach (ScriptableObject @object in Resources.LoadAll("Cards/Event"))
+            {
+                BaseCard card = @object as BaseCard;
+                if (card)
                 {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    foreach (ScriptableObject @object in Resources.LoadAll("Resources/Cards/Event"))
+                    if (!keyValuePairs.ContainsKey(card.cardTier))
                     {
-                        BaseCard card = @object as BaseCard;
-                        if (card)
-                        {
-                            if (!keyValuePairs.ContainsKey(card.cardTier))
-                            {
-                                keyValuePairs[card.cardTier] = new List<BaseCard>();
-                            }
-
-                            keyValuePairs[card.cardTier].Add(card);
-                        }
+                        keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
-                    _instance[1] = this;
+
+                    keyValuePairs[card.cardTier].Add(card);
                 }
-                break;
-            case BaseCard.BaseCardType.Action:
-                if (_instance[2] != null && _instance[2] != this)
+            }
+
+            foreach (ScriptableObject @object in Resources.LoadAll<ScriptableObject>("Cards/Action"))
+            {
+                BaseCard card = @object as BaseCard;
+                if (card)
                 {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    Debug.Log("Created action deck");
-                    foreach (ScriptableObject @object in Resources.LoadAll<ScriptableObject>("Cards/Action"))
+                    if (!keyValuePairs.ContainsKey(card.cardTier))
                     {
-                        Debug.Log("Loaded an object");
-
-                        BaseCard card = @object as BaseCard;
-                        if (card)
-                        {
-                            Debug.Log("Object existed as basecard");
-
-                            if (!keyValuePairs.ContainsKey(card.cardTier))
-                            {
-                                Debug.Log("Created keyvaluepair");
-                                keyValuePairs[card.cardTier] = new List<BaseCard>();
-                            }
-
-                            keyValuePairs[card.cardTier].Add(card);
-                        }
+                        keyValuePairs[card.cardTier] = new List<BaseCard>();
                     }
-                    _instance[2] = this;
+
+                    keyValuePairs[card.cardTier].Add(card);
                 }
-                break;
+            }
+
         }
 
 
@@ -113,7 +82,7 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
         card.cardSecondary = GetCardOfTier(tier);
         card.cardTier = tier;
 
-        GameObject go = Instantiate(cardPrefab,this.transform);
+        GameObject go = Instantiate(cardPrefab, transform);
         go.GetComponentInChildren<CardDisplay>().Card = card;
 
         return go;
@@ -124,12 +93,11 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
     {
         List<BaseCard> cards = keyValuePairs[tier];
         int random = Random.Range(0, cards.Count);
-        Debug.Log(random);
         return (cards[random]);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ToolTipHandler.Instance.textmesh.text = "The " + DeckType.ToString() + " deck";
+        ToolTipHandler.Instance.textmesh.text = "The deck";
     }
 }

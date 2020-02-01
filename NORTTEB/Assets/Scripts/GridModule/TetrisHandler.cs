@@ -32,7 +32,6 @@ public class TetrisHandler : MonoBehaviour {
 	void Update () {
 		if(isPlacing && TetrisPiece)
         {
-
         }
 	}
 }

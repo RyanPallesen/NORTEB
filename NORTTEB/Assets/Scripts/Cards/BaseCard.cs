@@ -85,7 +85,7 @@ public class BaseCard : ScriptableObject
     public void ChangeHandSize(Vector2 num)
     {
         Hand.Instance.HandSize += (int)Random.Range(num.x, num.y);
-        Hand.Instance.RebuildHandPositions();
+        Hand.Instance.UpdateHandSize();
     }
 
     public void UseResource(TetrisPiece.ResourceType resourceType)
@@ -100,7 +100,22 @@ public class BaseCard : ScriptableObject
 
     public void DrawCardType(BaseCard.BaseCardType cardType, Vector2 num)
     {
-        Hand.Instance.DrawCard(cardType);
+        int random = (int)Random.Range(num.x, num.y);
+
+        if (random < 0)
+        {
+            for (int i = 0; i < random; i++)
+            {
+                Hand.Instance.DiscardCard(cardType);
+            }
+        }
+        else if (random > 0)
+        {
+            for (int i = 0; i < random; i++)
+            {
+                Hand.Instance.DrawCard();
+            }
+        }
     }
 
     public void UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
@@ -185,5 +200,7 @@ public class BaseCard : ScriptableObject
                 }
                 break;
         }
+
+        TetrisHandler.Instance.isPlacing = true;
     }
 }
