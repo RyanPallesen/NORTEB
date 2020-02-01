@@ -15,25 +15,25 @@ MonoBehaviour:
   isFullCard: 1
   baseCardType: 1
   cardTier: 3
-  frequency: 2
+  frequency: 12
   cardName: Meteorite Shower
   cardDescription: Meteorite Shower
   flavourText: FlavourText
   events:
   - eventType: 2
-    valueRange: {x: 4, y: 4}
+    valueRange: {x: 5, y: 5}
     cardType: 1
     resourceType: 1
     eventTypeNix: 0
     tetrisPiece: 0
   - eventType: 0
-    valueRange: {x: 4, y: 4}
+    valueRange: {x: 5, y: 5}
     cardType: 1
     resourceType: 2
     eventTypeNix: 0
     tetrisPiece: 0
   - eventType: 0
-    valueRange: {x: 4, y: 4}
+    valueRange: {x: 5, y: 5}
     cardType: 1
     resourceType: 3
     eventTypeNix: 0

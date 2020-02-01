@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
   m_Name: 2.Micro-Meteorite Strike!
   m_EditorClassIdentifier: 
-  isFullCard: 0
+  isFullCard: 1
   baseCardType: 2
   cardTier: 1
   frequency: 0
-  cardName: New Card
-  cardDescription: DescriptionText
-  flavourText: FlavourText
-  events: []
+  cardName: Micro-Meteorite Strike!
+  cardDescription: A tiny meteorite punches through your ship!
+  flavourText: We can seal the hole, but repair is impossible.
+  events:
+  - eventType: 2
+    valueRange: {x: 0, y: 0}
+    cardType: 0
+    resourceType: 0
+    eventTypeNix: 0
+    tetrisPiece: 0
   delayedEvents: []
