@@ -18,7 +18,7 @@ MonoBehaviour:
   frequency: 2
   cardName: Repair Patch
   cardDescription: 2 WING repair
-  flavourText: Basic patches that can mend your wings
+  flavourText: Solid patches that can mend your wings
   events:
   - eventType: 4
     valueRange: {x: 3, y: 3}

@@ -26,13 +26,13 @@ MonoBehaviour:
     resourceType: 1
     eventTypeNix: 0
     tetrisPiece: 0
-  - eventType: 0
+  - eventType: 2
     valueRange: {x: 5, y: 5}
     cardType: 1
     resourceType: 2
     eventTypeNix: 0
     tetrisPiece: 0
-  - eventType: 0
+  - eventType: 2
     valueRange: {x: 5, y: 5}
     cardType: 1
     resourceType: 3

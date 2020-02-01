@@ -10,32 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
-  m_Name: 2.Shower3
+  m_Name: 2.Move1
   m_EditorClassIdentifier: 
   isFullCard: 1
-  baseCardType: 1
+  baseCardType: 2
   cardTier: 2
-  frequency: 3
-  cardName: Meteorite Shower
-  cardDescription: 3 damage to each system
-  flavourText: A smattering of pebbles peppers your hull
+  frequency: 18
+  cardName: Cheap Accelerant
+  cardDescription: Move 1 for 2 random damage
+  flavourText: An outpost on a passing comet is selling cheap accelerant. Every little
+    bit counts.
   events:
-  - eventType: 2
-    valueRange: {x: 3, y: 3}
-    cardType: 1
-    resourceType: 1
+  - eventType: 7
+    valueRange: {x: 1, y: 1}
+    cardType: 2
+    resourceType: 0
     eventTypeNix: 0
     tetrisPiece: 0
   - eventType: 2
-    valueRange: {x: 3, y: 3}
-    cardType: 1
-    resourceType: 2
+    valueRange: {x: 1, y: 1}
+    cardType: 2
+    resourceType: 0
     eventTypeNix: 0
     tetrisPiece: 0
   - eventType: 2
-    valueRange: {x: 3, y: 3}
-    cardType: 1
-    resourceType: 3
+    valueRange: {x: 1, y: 1}
+    cardType: 2
+    resourceType: 0
     eventTypeNix: 0
     tetrisPiece: 0
   delayedEvents: []
