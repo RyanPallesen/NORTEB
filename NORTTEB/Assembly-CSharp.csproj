@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Cards\CardDisplay.cs" />
     <Compile Include="Assets\Scripts\Cards\Deck.cs" />
     <Compile Include="Assets\Scripts\Cards\Hand.cs" />
+    <Compile Include="Assets\Scripts\GridModule\Grid.cs" />
     <Compile Include="Assets\Scripts\GridModule\TetrisHandler.cs" />
     <Compile Include="Assets\Scripts\GridModule\TetrisPiece.cs" />
     <Compile Include="Assets\Scripts\ToolTipHandler.cs" />

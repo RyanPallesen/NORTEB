@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlacing: 0
   TetrisPiece: {fileID: 0}
+  tetrisObj: {fileID: 0}
 --- !u!1 &341083681
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +468,7 @@ Camera:
   far clip plane: 1000
   field of view: 1
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

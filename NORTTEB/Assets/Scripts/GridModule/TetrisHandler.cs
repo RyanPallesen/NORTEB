@@ -35,10 +35,8 @@ public class TetrisHandler : MonoBehaviour {
     {
 		if(isPlacing && TetrisPiece)
         {
-<<<<<<< HEAD
-=======
-            tetrisObj.transform.position = Input.mousePosition;
-
+            tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            tetrisObj.transform.Translate(new Vector3(0, 0, 190));
             if(Input.GetKeyDown(KeyCode.D))
             {
                 tetrisObj.transform.Rotate(new Vector3(0, 0, -90));
@@ -48,7 +46,15 @@ public class TetrisHandler : MonoBehaviour {
             {
                 tetrisObj.transform.Rotate(new Vector3(0, 0, 90));
             }
->>>>>>> 73e26ac3841c76fc5cd60aa4175e713c4e4be3e5
+
+            if(Input.GetMouseButton(0))
+            {
+                foreach(TetrisPiece.Square square in TetrisPiece.squares)
+                {
+                    //raycast backwards to see if there is a grid square behind
+                }
+            }
+
         }
 	}
 }

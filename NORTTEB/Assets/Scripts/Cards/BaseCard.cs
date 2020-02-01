@@ -201,6 +201,23 @@ public class BaseCard : ScriptableObject
                 break;
         }
 
+        GameObject ParentObject = new GameObject();
+        ParentObject.transform.position = Vector3.zero;
+
+        foreach(TetrisPiece.Square square in TetrisHandler.Instance.TetrisPiece.squares)
+        {
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            cube.transform.SetParent(ParentObject.transform);
+            
+            cube.transform.localPosition = new Vector3(square.yOffset, square.xOffset);
+
+           
+        }
+
+        TetrisHandler.Instance.tetrisObj = ParentObject;
+
+
         TetrisHandler.Instance.isPlacing = true;
     }
 }

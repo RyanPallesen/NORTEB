@@ -14,7 +14,6 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
 
     private static Deck _instance;
 
-
     private void Awake()
     {
 
