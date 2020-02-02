@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
+  timeInHand: 0
   cardTier: 3
   frequency: 2
   cardName: Repair Patch
@@ -23,7 +24,8 @@ MonoBehaviour:
   - eventType: 4
     valueRange: {x: 2, y: 2}
     cardType: 0
-    resourceType: 3
+    resourceType: 2
     eventTypeNix: 0
     tetrisPiece: 2
   delayedEvents: []
+  tetrisObject: {fileID: 0}
