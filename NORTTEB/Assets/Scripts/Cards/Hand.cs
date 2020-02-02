@@ -161,6 +161,14 @@ public class Hand : MonoBehaviour
         }
     }
 
+    public void MoveExtra()
+    {
+        Movement++;
+        TetrisHandler.Instance.TakeDamage(TetrisPiece.ResourceType.Air);
+        TetrisHandler.Instance.TakeDamage(TetrisPiece.ResourceType.Fuel);
+        TetrisHandler.Instance.TakeDamage(TetrisPiece.ResourceType.Metal);
+    }
+
     public void EndTurn()
     {
         if (TetrisHandler.Instance.resources.Count < 1)
@@ -227,7 +235,7 @@ public class Hand : MonoBehaviour
                 DiscardCard(discards[i]);
             }
 
-            Movement++;
+            MoveExtra();
             Turn++;
 
 

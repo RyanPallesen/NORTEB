@@ -15,6 +15,14 @@ public class GridCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDestroyed)
+        {
+            GetComponent<Renderer>().material.SetFloat("_Type", 1);
+        }
+        else
+        {
+            GetComponent<Renderer>().material.SetFloat("_Type", 0);
 
+        }
     }
 }

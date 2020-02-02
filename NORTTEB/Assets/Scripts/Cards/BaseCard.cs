@@ -151,201 +151,128 @@ public class BaseCard : ScriptableObject
 
     public void DamageShuttle(TetrisPiece.ResourceType resourceType, Vector2 num)
     {
-        switch (resourceType)
+        int random = (int)Random.Range(num.x, num.y);
 
+        for (int i = 0; i < random; i++)
         {
-            case TetrisPiece.ResourceType.Randomized:
-                DamageShuttle((TetrisPiece.ResourceType)Random.Range(1, 5), num);
-                break;
-            case TetrisPiece.ResourceType.Air:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
-
-                    for (int i = 0; i < random; i++)
+            switch (resourceType)
+            {
+                case TetrisPiece.ResourceType.Randomized:
+                    DamageShuttle((TetrisPiece.ResourceType)Random.Range(1, 5), num);
+                    break;
+                case TetrisPiece.ResourceType.Air:
                     {
-                        if (TetrisHandler.Instance.airObject.transform.childCount > TetrisHandler.Instance.airList.Count)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.airObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.airObject.transform);
 
-                            List<Transform> truechilds = new List<Transform>();
-                            foreach (Transform child in childs)
+                        {
+                            if (TetrisHandler.Instance.airObject.transform.childCount > TetrisHandler.Instance.airList.Count)
                             {
-                                if (child.childCount < 1)
+                                List<Transform> childs = TetrisHandler.Instance.airObject.GetComponentsInChildren<Transform>().ToList();
+                                childs.Remove(TetrisHandler.Instance.airObject.transform);
+
+                                List<Transform> truechilds = new List<Transform>();
+                                foreach (Transform child in childs)
                                 {
-                                    truechilds.Add(child);
+                                    if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                    {
+                                        truechilds.Add(child);
+                                    }
                                 }
+
+                                GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                                randomObject.GetComponent<GridCube>().isDestroyed = true;
                             }
 
-                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
-
-                            Destroy(randomObject);
                         }
-                        else if (TetrisHandler.Instance.airList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.airList.Count);
-                            GameObject temp = TetrisHandler.Instance.airList[index];
-                            TetrisHandler.Instance.airList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-
                     }
-                }
-                break;
-            case TetrisPiece.ResourceType.Metal:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
-
-                    for (int i = 0; i < random; i++)
+                    break;
+                case TetrisPiece.ResourceType.Metal:
                     {
-                        if (TetrisHandler.Instance.metalObject.transform.childCount > TetrisHandler.Instance.metalList.Count)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.metalObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.metalObject.transform);
 
-                            List<Transform> truechilds = new List<Transform>();
-                            foreach (Transform child in childs)
+                        {
+                            if (TetrisHandler.Instance.metalObject.transform.childCount > TetrisHandler.Instance.metalList.Count)
                             {
-                                if (child.childCount < 1)
+                                List<Transform> childs = TetrisHandler.Instance.metalObject.GetComponentsInChildren<Transform>().ToList();
+                                childs.Remove(TetrisHandler.Instance.metalObject.transform);
+
+                                List<Transform> truechilds = new List<Transform>();
+                                foreach (Transform child in childs)
                                 {
-                                    truechilds.Add(child);
+                                    if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                    {
+                                        truechilds.Add(child);
+                                    }
                                 }
+
+                                GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                                randomObject.GetComponent<GridCube>().isDestroyed = true;
                             }
 
-                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
-
-                            Destroy(randomObject);
                         }
-                        else if (TetrisHandler.Instance.fuelList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.metalList.Count);
-                            GameObject temp = TetrisHandler.Instance.metalList[index];
-                            TetrisHandler.Instance.metalList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-
                     }
-                }
-                break;
-            case TetrisPiece.ResourceType.Fuel:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
-
-                    for (int i = 0; i < random; i++)
+                    break;
+                case TetrisPiece.ResourceType.Fuel:
                     {
-                        if (TetrisHandler.Instance.fuelObject.transform.childCount > TetrisHandler.Instance.fuelList.Count)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.fuelObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.fuelObject.transform);
 
-                            List<Transform> truechilds = new List<Transform>();
-                            foreach (Transform child in childs)
+                        {
+                            if (TetrisHandler.Instance.fuelObject.transform.childCount > TetrisHandler.Instance.fuelList.Count)
                             {
-                                if (child.childCount < 1)
+                                List<Transform> childs = TetrisHandler.Instance.fuelObject.GetComponentsInChildren<Transform>().ToList();
+                                childs.Remove(TetrisHandler.Instance.fuelObject.transform);
+
+                                List<Transform> truechilds = new List<Transform>();
+                                foreach (Transform child in childs)
                                 {
-                                    truechilds.Add(child);
+                                    if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                    {
+                                        truechilds.Add(child);
+                                    }
                                 }
+
+                                GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                                randomObject.GetComponent<GridCube>().isDestroyed = true;
                             }
 
-                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
-
-                            Destroy(randomObject);
                         }
-                        else if (TetrisHandler.Instance.fuelList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.fuelList.Count);
-                            GameObject temp = TetrisHandler.Instance.fuelList[index];
-                            TetrisHandler.Instance.fuelList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-
                     }
-                }
-                break;
-            case TetrisPiece.ResourceType.Flexible:
-                break;
+                    break;
+                case TetrisPiece.ResourceType.Flexible:
+                    break;
 
+            }
         }
     }
 
     public void DamageResource(TetrisPiece.ResourceType resourceType, Vector2 num)
     {
-        switch (resourceType)
-        {
-            case TetrisPiece.ResourceType.Randomized:
-                DamageResource((TetrisPiece.ResourceType)Random.Range(1, 5), num);
-                break;
-            case TetrisPiece.ResourceType.Air:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
+        int random = (int)Random.Range(num.x, num.y);
+        for(int i = 0; i < random; i++)
+            {
+            switch (resourceType)
+            {
+                case TetrisPiece.ResourceType.Randomized:
+                    TetrisHandler.Instance.TakeDamage((TetrisPiece.ResourceType)Random.Range(1,4));
 
-                    for (int i = 0; i < random; i++)
-                    {
-                        if (TetrisHandler.Instance.airList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.airList.Count);
-                            GameObject temp = TetrisHandler.Instance.airList[index];
-                            TetrisHandler.Instance.airList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-                        else if (TetrisHandler.Instance.airObject.transform.childCount > 0)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.airObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.airObject.transform);
-                            GameObject randomObject = (GameObject)((Transform)childs[Random.Range(0, childs.Count)]).gameObject;
-                            Destroy(randomObject);
-                        }
-                    }
-                }
-                break;
-            case TetrisPiece.ResourceType.Metal:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
+                    break;
+                case TetrisPiece.ResourceType.Air:
+                    TetrisHandler.Instance.TakeDamage(resourceType);
+                    break;
+                case TetrisPiece.ResourceType.Metal:
+                    TetrisHandler.Instance.TakeDamage(resourceType);
 
-                    for (int i = 0; i < random; i++)
-                    {
-                        if (TetrisHandler.Instance.metalList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.metalList.Count);
-                            GameObject temp = TetrisHandler.Instance.metalList[index];
-                            TetrisHandler.Instance.metalList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-                        else if (TetrisHandler.Instance.metalObject.transform.childCount > 0)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.metalObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.metalObject.transform);
-                            GameObject randomObject = (GameObject)((Transform)childs[Random.Range(0, childs.Count)]).gameObject;
-                            Destroy(randomObject);
-                        }
-                    }
-                }
-                break;
-            case TetrisPiece.ResourceType.Fuel:
-                {
-                    int random = (int)Random.Range(num.x, num.y);
+                    break;
+                case TetrisPiece.ResourceType.Fuel:
+                    TetrisHandler.Instance.TakeDamage(resourceType);
 
-                    for (int i = 0; i < random; i++)
-                    {
-                        if (TetrisHandler.Instance.fuelList.Count > 0)
-                        {
-                            int index = Random.Range(0, TetrisHandler.Instance.fuelList.Count);
-                            GameObject temp = TetrisHandler.Instance.fuelList[index];
-                            TetrisHandler.Instance.fuelList.RemoveAt(index);
-                            Destroy(temp);
-                        }
-                        else if (TetrisHandler.Instance.fuelObject.transform.childCount > 0)
-                        {
-                            List<Transform> childs = TetrisHandler.Instance.fuelObject.GetComponentsInChildren<Transform>().ToList();
-                            childs.Remove(TetrisHandler.Instance.fuelObject.transform);
-                            GameObject randomObject = (GameObject)((Transform)childs[Random.Range(0, childs.Count)]).gameObject;
-                            Destroy(randomObject);
-                        }
-                    }
-                }
-                break;
-            case TetrisPiece.ResourceType.Flexible:
-                break;
+                    break;
+                case TetrisPiece.ResourceType.Flexible:
+                    TetrisHandler.Instance.TakeDamage(resourceType);
+
+                    break;
+            }
+
         }
     }
 
@@ -445,7 +372,7 @@ public class BaseCard : ScriptableObject
         GameObject ParentObject = new GameObject();
         ParentObject.transform.position = Vector3.zero;
         ParentObject.AddComponent<TetrisParent>().squares = squares.Select(square => new TetrisPiece.Square() { xOffset = square.xOffset, yOffset = square.yOffset, resourceType = square.resourceType }).ToList(); ;
-
+        ParentObject.GetComponent<TetrisParent>().isRepair = squares.Count == 1;
         foreach (TetrisPiece.Square square in squares)
         {
             GameObject cube = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/TetrisCube"));

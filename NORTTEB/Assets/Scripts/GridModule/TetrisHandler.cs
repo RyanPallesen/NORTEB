@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TetrisHandler : MonoBehaviour
@@ -104,6 +105,129 @@ public class TetrisHandler : MonoBehaviour
 
     }
 
+
+    public void TakeDamage(TetrisPiece.ResourceType resourceType)
+    {
+        switch (resourceType)
+        {
+
+            case TetrisPiece.ResourceType.Air:
+                {
+                    {
+                        if (TetrisHandler.Instance.airList.Count > 0)
+                        {
+                            int index = Random.Range(0, TetrisHandler.Instance.airList.Count);
+                            GameObject temp = TetrisHandler.Instance.airList[index];
+                            TetrisHandler.Instance.airList.RemoveAt(index);
+                            Destroy(temp);
+                        }
+                        else if (TetrisHandler.Instance.airObject.transform.childCount > 0)
+                        {
+                            List<Transform> childs = TetrisHandler.Instance.airObject.GetComponentsInChildren<Transform>().ToList();
+                            childs.Remove(TetrisHandler.Instance.airObject.transform);
+
+                            List<Transform> truechilds = new List<Transform>();
+                            foreach (Transform child in childs)
+                            {
+                                if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                {
+                                    truechilds.Add(child);
+                                }
+                            }
+
+                            if(truechilds.Count < 1)
+                            {
+                                Debug.Log("YOU LOSE");
+                                return;
+                            }
+                            
+                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                            randomObject.GetComponent<GridCube>().isDestroyed = true;
+                        }
+                    }
+                }
+                break;
+            case TetrisPiece.ResourceType.Metal:
+                {
+
+                    {
+                        if (TetrisHandler.Instance.metalList.Count > 0)
+                        {
+                            int index = Random.Range(0, TetrisHandler.Instance.metalList.Count);
+                            GameObject temp = TetrisHandler.Instance.metalList[index];
+                            TetrisHandler.Instance.metalList.RemoveAt(index);
+                            Destroy(temp);
+                        }
+                        else if (TetrisHandler.Instance.metalObject.transform.childCount > 0)
+                        {
+                            List<Transform> childs = TetrisHandler.Instance.metalObject.GetComponentsInChildren<Transform>().ToList();
+                            childs.Remove(TetrisHandler.Instance.metalObject.transform);
+
+                            List<Transform> truechilds = new List<Transform>();
+                            foreach (Transform child in childs)
+                            {
+                                if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                {
+                                    truechilds.Add(child);
+                                }
+                            }
+                            if (truechilds.Count < 1)
+                            {
+                                Debug.Log("YOU LOSE");
+                                return;
+                            }
+
+                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                            randomObject.GetComponent<GridCube>().isDestroyed = true;
+                        }
+                    }
+                }
+                break;
+            case TetrisPiece.ResourceType.Fuel:
+                {
+
+                    {
+                        if (TetrisHandler.Instance.fuelList.Count > 0)
+                        {
+                            int index = Random.Range(0, TetrisHandler.Instance.fuelList.Count);
+                            GameObject temp = TetrisHandler.Instance.fuelList[index];
+                            TetrisHandler.Instance.fuelList.RemoveAt(index);
+                            Destroy(temp);
+                        }
+                        else if (TetrisHandler.Instance.fuelObject.transform.childCount > 0)
+                        {
+                            List<Transform> childs = TetrisHandler.Instance.fuelObject.GetComponentsInChildren<Transform>().ToList();
+                            childs.Remove(TetrisHandler.Instance.fuelObject.transform);
+
+                            List<Transform> truechilds = new List<Transform>();
+                            foreach (Transform child in childs)
+                            {
+                                if (child.childCount < 1 && child.GetComponent<GridCube>().isDestroyed == false)
+                                {
+                                    truechilds.Add(child);
+                                }
+                            }
+
+                            if (truechilds.Count < 1)
+                            {
+                                Debug.Log("YOU LOSE");
+                                return;
+                            }
+
+                            GameObject randomObject = (GameObject)((Transform)truechilds[Random.Range(0, truechilds.Count)]).gameObject;
+
+                            randomObject.GetComponent<GridCube>().isDestroyed = true;
+                        }
+                    }
+                }
+                break;
+            case TetrisPiece.ResourceType.Flexible:
+                break;
+        }
+    }
+
     public void TrashCurrent()
     {
         if (resources.Count > 0)
@@ -138,7 +262,7 @@ public class TetrisHandler : MonoBehaviour
         {
             tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tetrisObj.transform.Translate(new Vector3(0, 0, 189));
-            
+
             //Rotate piece
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -165,7 +289,7 @@ public class TetrisHandler : MonoBehaviour
                     if (Physics.Raycast(workingTransform.position, new Vector3(0, 0, 1), out RaycastHit hit))
                     {
 
-                        if (hit.collider.transform.parent.GetComponent<GridPiece>() && hit.collider.transform.gameObject.GetComponent<GridCube>().isDestroyed == false)
+                        if (hit.collider.transform.parent.GetComponent<GridPiece>() && ((hit.collider.transform.gameObject.GetComponent<GridCube>().isDestroyed == false) || ( hit.collider.transform.gameObject.GetComponent<GridCube>().isDestroyed == true && tetrisObj.GetComponent<TetrisParent>().isRepair)))
                         {
                             TetrisPiece.ResourceType GridType = hit.collider.transform.parent.GetComponent<GridPiece>().resourceType;
 
@@ -195,7 +319,7 @@ public class TetrisHandler : MonoBehaviour
                 }
 
                 if (isValidPlacement)
-                {                                       
+                {
                     for (int i = 0; i < tetrisObj.transform.childCount; i++)
                     {
                         //raycast backwards to see if there is a grid square behind
@@ -219,27 +343,38 @@ public class TetrisHandler : MonoBehaviour
                                     }
                                     else
                                     {
-                                        workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
-                                        
-                                        if (CubeType == TetrisPiece.ResourceType.Flexible)
+                                        if(tetrisObj.gameObject.GetComponent<TetrisParent>().isRepair)
                                         {
-                                            squares[i].resourceType = GridType;
-                                            workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)squares[i].resourceType);
+                                            Destroy(workingTransform.gameObject);
 
-                                        }
+                                            Debug.Log("Setting is destroyed false");
 
-                                        if (GridType == TetrisPiece.ResourceType.Air)
-                                        {
-                                            airList.Add(workingTransform.gameObject);
+                                            hit.collider.transform.gameObject.GetComponent<GridCube>().isDestroyed = false;
                                         }
-                                        else if (GridType == TetrisPiece.ResourceType.Fuel)
+                                        else
                                         {
-                                            fuelList.Add(workingTransform.gameObject);
+                                            workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
 
-                                        }
-                                        else if (GridType == TetrisPiece.ResourceType.Metal)
-                                        {
-                                            metalList.Add(workingTransform.gameObject);
+                                            if (CubeType == TetrisPiece.ResourceType.Flexible)
+                                            {
+                                                squares[i].resourceType = GridType;
+                                                workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)squares[i].resourceType);
+
+                                            }
+
+                                            if (GridType == TetrisPiece.ResourceType.Air)
+                                            {
+                                                airList.Add(workingTransform.gameObject);
+                                            }
+                                            else if (GridType == TetrisPiece.ResourceType.Fuel)
+                                            {
+                                                fuelList.Add(workingTransform.gameObject);
+
+                                            }
+                                            else if (GridType == TetrisPiece.ResourceType.Metal)
+                                            {
+                                                metalList.Add(workingTransform.gameObject);
+                                            }
                                         }
                                     }
                                     //place it
@@ -260,7 +395,7 @@ public class TetrisHandler : MonoBehaviour
                                     Destroy(workingTransform.gameObject);
                                     if (hit.collider.GetComponent<TetrisTag>().ResourceType != CubeType)
                                     {
-                                        
+
 
                                         if (airList.Contains(hit.collider.transform.gameObject))
                                         {
@@ -290,7 +425,7 @@ public class TetrisHandler : MonoBehaviour
                     }
 
                     isPlacing = false;
-                    if(resources.Count > 0)
+                    if (resources.Count > 0)
                     {
                         resources.Remove(resources[0]);
                     }
