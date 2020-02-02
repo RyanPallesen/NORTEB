@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridCube : MonoBehaviour
 {
+    public bool isDestroyed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class GridCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

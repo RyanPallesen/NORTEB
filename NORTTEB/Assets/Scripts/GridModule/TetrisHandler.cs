@@ -163,7 +163,7 @@ public class TetrisHandler : MonoBehaviour
                     if (Physics.Raycast(workingTransform.position, new Vector3(0, 0, 1), out RaycastHit hit))
                     {
 
-                        if (hit.collider.transform.parent.GetComponent<GridPiece>())
+                        if (hit.collider.transform.parent.GetComponent<GridPiece>() && hit.collider.transform.gameObject.GetComponent<GridCube>().isDestroyed == false)
                         {
                             TetrisPiece.ResourceType GridType = hit.collider.transform.parent.GetComponent<GridPiece>().resourceType;
 
@@ -258,7 +258,7 @@ public class TetrisHandler : MonoBehaviour
                                     Destroy(workingTransform.gameObject);
                                     if (hit.collider.GetComponent<TetrisTag>().ResourceType != CubeType)
                                     {
-                                        Destroy(hit.collider.transform.gameObject);
+                                        
 
                                         if (airList.Contains(hit.collider.transform.gameObject))
                                         {
