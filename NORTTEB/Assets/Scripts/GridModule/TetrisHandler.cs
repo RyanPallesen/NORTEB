@@ -104,6 +104,14 @@ public class TetrisHandler : MonoBehaviour
 
     }
 
+    public void TrashCurrent()
+    {
+        if (resources.Count > 0)
+        {
+            resources.Remove(resources[0]);
+        }
+    }
+
     private void Start()
     {
 
