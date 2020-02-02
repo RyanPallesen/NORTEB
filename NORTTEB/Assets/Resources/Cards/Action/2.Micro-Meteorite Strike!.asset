@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
+  timeInHand: 0
   cardTier: 2
   frequency: 6
   cardName: Micro-Meteorite Strike!
   cardDescription: A tiny meteorite punches through your ship!
-  flavourText: We can seal the hole, but repair is impossible
+  flavourText: No repairing that one. Should've called on Steve.
   events:
   - eventType: 8
     valueRange: {x: 1, y: 1}
@@ -27,3 +28,5 @@ MonoBehaviour:
     eventTypeNix: 0
     tetrisPiece: 2
   delayedEvents: []
+  tetrisObject: {fileID: 0}
+  squares: []

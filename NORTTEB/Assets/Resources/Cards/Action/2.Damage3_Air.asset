@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
+  timeInHand: 0
   cardTier: 2
   frequency: 4
   cardName: Damage
-  cardDescription: 4 AIR damage
+  cardDescription: 3 AIR damage
   flavourText: A stray rock bounces off your air supply
   events:
   - eventType: 2

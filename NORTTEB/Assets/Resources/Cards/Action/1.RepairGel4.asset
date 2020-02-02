@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 0
+  timeInHand: 0
   cardTier: 2
   frequency: 6
   cardName: Repair Gel
-  cardDescription: Repair 4 holes
-  flavourText: This flexible gel can patch holes anywhere on your ship
+  cardDescription: Repair 4 in any system
+  flavourText: This flexible gel can mend damage anywhere on the ship
   events:
   - eventType: 4
     valueRange: {x: 4, y: 4}

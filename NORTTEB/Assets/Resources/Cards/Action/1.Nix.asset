@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 2
+  timeInHand: 0
   cardTier: 1
   frequency: 6
   cardName: Call Steve.
-  cardDescription: Use this card to counter any event
+  cardDescription: Counters any event
   flavourText: Steve owes you a favour. He can handle this for you.
   events:
   - eventType: 5
@@ -27,3 +28,5 @@ MonoBehaviour:
     eventTypeNix: 0
     tetrisPiece: 0
   delayedEvents: []
+  tetrisObject: {fileID: 0}
+  squares: []

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
+  timeInHand: 0
   cardTier: 2
   frequency: 4
   cardName: Damage
-  cardDescription: 4 WING damage
+  cardDescription: 3 WING damage
   flavourText: A stray rock bounces off your wing
   events:
   - eventType: 2
