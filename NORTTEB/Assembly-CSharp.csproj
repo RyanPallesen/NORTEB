@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GridCube.cs" />
+     <Compile Include="Assets\ScoreHandler.cs" />
      <Compile Include="Assets\Scripts\ActivateUI.cs" />
      <Compile Include="Assets\Scripts\Cards\BaseCard.cs" />
      <Compile Include="Assets\Scripts\Cards\Card.cs" />
