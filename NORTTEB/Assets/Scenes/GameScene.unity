@@ -429,9 +429,9 @@ MonoBehaviour:
   airList: []
   fuelList: []
   metalList: []
-  airObject: {fileID: 0}
-  fuelObject: {fileID: 0}
-  metalObject: {fileID: 0}
+  airObject: {fileID: 1314300474}
+  fuelObject: {fileID: 848193882}
+  metalObject: {fileID: 567832880}
   squares: []
   resources: []
 --- !u!222 &238939697
@@ -663,6 +663,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 494902102}
   distance: 1.17
+--- !u!1 &567832880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6478136965488850939, guid: e6341ec49d23dcd4690a2faf62087064,
+    type: 3}
+  m_PrefabInstance: {fileID: 1935856244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &828158021
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +752,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &848193882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6478136965488850939, guid: 3e6806e6421ea6844beda6d9c618a4e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1224939038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &857040494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1363,7 +1375,7 @@ PrefabInstance:
     - target: {fileID: 6478136965488850937, guid: 3e6806e6421ea6844beda6d9c618a4e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 161.37143
+      value: 166.56
       objectReference: {fileID: 0}
     - target: {fileID: 6478136965488850937, guid: 3e6806e6421ea6844beda6d9c618a4e2,
         type: 3}
@@ -1442,6 +1454,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6478136965488850937, guid: 3e6806e6421ea6844beda6d9c618a4e2,
     type: 3}
   m_PrefabInstance: {fileID: 1224939038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1314300474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6478136965488850939, guid: 0e4b85986edb1484ea7110713b669bb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 857040494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1320062276
 GameObject:

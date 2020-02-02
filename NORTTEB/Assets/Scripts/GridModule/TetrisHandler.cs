@@ -108,6 +108,8 @@ public class TetrisHandler : MonoBehaviour
     {
         if (resources.Count > 0)
         {
+            Destroy(resources[0].gameObject);
+            isPlacing = false;
             resources.Remove(resources[0]);
         }
     }
