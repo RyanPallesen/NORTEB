@@ -81,13 +81,11 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
 
     public GameObject GetCard(int tier)
     {
-        Debug.Log("Drawing card from tier " + tier);
-
         Card card = new Card();
 
         card.cardPrimary = GetCardOfTier(tier);
         card.cardSecondary = GetCardOfTier(tier);
-
+        
         if(card.cardPrimary.isFullCard)
         {
             card.cardSecondary = card.cardPrimary;
@@ -98,6 +96,7 @@ public class Deck : MonoBehaviour, IPointerEnterHandler
             card.cardPrimary = card.cardSecondary;
         }
 
+        
         card.cardTier = tier;
 
         GameObject go = Instantiate(cardPrefab, transform);

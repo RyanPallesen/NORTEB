@@ -7,7 +7,7 @@ public class TetrisHandler : MonoBehaviour
 
 
     public bool isPlacing = false;
-    public TetrisPiece TetrisPiece;
+    public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
     public GameObject tetrisObj;
     private static TetrisHandler _instance;
     private bool isValidPlacement;
@@ -47,7 +47,8 @@ public class TetrisHandler : MonoBehaviour
         if (resources.Count > 0 && !isPlacing)
         {
             isPlacing = true;
-            BaseCard.UseResourceCard(resources[0].PieceType, resources[0].ResourceType);
+            tetrisObj = resources[0].gameObject;
+            squares = resources[0].squares;
         }
 
         if (isPlacing)
@@ -70,7 +71,7 @@ public class TetrisHandler : MonoBehaviour
 
                 for (int i = 0; i < tetrisObj.transform.childCount; i++)
                 {
-                    TetrisPiece.ResourceType CubeType = TetrisPiece.squares[i].resourceType;
+                    TetrisPiece.ResourceType CubeType = squares[i].resourceType;
 
                     //raycast backwards to see if there is a grid square behind
 
@@ -121,14 +122,12 @@ public class TetrisHandler : MonoBehaviour
 
                         if (Physics.Raycast(workingTransform.position, new Vector3(0, 0, 1), out RaycastHit hit))
                         {
-                            TetrisPiece.ResourceType CubeType = TetrisPiece.squares[i].resourceType;
+                            TetrisPiece.ResourceType CubeType = squares[i].resourceType;
 
                             if (hit.collider.transform.parent.GetComponent<GridPiece>())
                             {
                                 TetrisPiece.ResourceType GridType = hit.collider.transform.parent.GetComponent<GridPiece>().resourceType;
 
-                                Debug.Log(CubeType);
-                                Debug.DrawRay(workingTransform.position, new Vector3(0, 0, 1));
                                 //if gridtype == resourcetype, place.
                                 if (GridType == CubeType || CubeType == TetrisPiece.ResourceType.Flexible)
                                 {
@@ -143,8 +142,8 @@ public class TetrisHandler : MonoBehaviour
 
                                         if (CubeType == TetrisPiece.ResourceType.Flexible)
                                         {
-                                            TetrisPiece.squares[i].resourceType = GridType;
-                                            workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)TetrisPiece.squares[i].resourceType);
+                                            squares[i].resourceType = GridType;
+                                            workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)squares[i].resourceType);
 
                                         }
 
@@ -216,7 +215,6 @@ public class TetrisHandler : MonoBehaviour
                         }
                     }
 
-                    Debug.Log("DELETED");
                     isPlacing = false;
                     resources.Remove(resources[0]);
                 }
