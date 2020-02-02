@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
+  timeInHand: 0
   cardTier: 2
   frequency: 9
   cardName: Space Junk
-  cardDescription: Completely useless
-  flavourText: A drifting clothes-line tangles around your ship - it'll take a while
-    to cut free
+  cardDescription: This will take some time to cut free
+  flavourText: A drifting clothes-line tangles around your ship
   events:
   - eventType: 6
     valueRange: {x: 0, y: 0}
@@ -35,3 +35,5 @@ MonoBehaviour:
     eventTypeNix: 0
     tetrisPiece: 0
     turnDelay: 1
+  tetrisObject: {fileID: 0}
+  squares: []
