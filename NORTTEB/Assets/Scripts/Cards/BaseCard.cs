@@ -309,8 +309,6 @@ public class BaseCard : ScriptableObject
 
         List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
         squares.Clear();
-
-        Debug.Log("Used resource card");
         
         if(pieceType == TetrisPiece.PieceType.RandomNonDot)
         {
