@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 1
   baseCardType: 1
+  timeInHand: 2
   cardTier: 1
   frequency: 6
   cardName: Space Junk
@@ -34,4 +35,4 @@ MonoBehaviour:
     resourceType: 0
     eventTypeNix: 0
     tetrisPiece: 0
-    turnDelay: 1
+    turnDelay: 2

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
-  m_Name: 1.Repair3_Air
+  m_Name: 2.Repair3_Air
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
-  cardTier: 1
-  frequency: 2
+  cardTier: 2
+  frequency: 4
   cardName: Repair Patch
   cardDescription: 2 AIR repair
   flavourText: Solid patches that can mend your air supply

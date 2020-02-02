@@ -18,7 +18,7 @@ MonoBehaviour:
   frequency: 2
   cardName: Repair Patch
   cardDescription: 2 FUEL repair
-  flavourText: Basic patches that can mend your thrusters
+  flavourText: Solid patches that can mend your thrusters
   events:
   - eventType: 4
     valueRange: {x: 3, y: 3}

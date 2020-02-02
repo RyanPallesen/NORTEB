@@ -68,16 +68,22 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
 
     public void DoCard()
     {
+        bool shouldDiscard = false;
         if (card1Displayed)
         {
-            Card.cardPrimary.DoCardBehaviour();
+            shouldDiscard = Card.cardPrimary.DoCardBehaviour();
         }
         else
         {
-            Card.cardSecondary.DoCardBehaviour();
+            shouldDiscard = Card.cardSecondary.DoCardBehaviour();
         }
 
-        Hand.Instance.DiscardCard(this);
+            if (shouldDiscard)
+        {
+            Hand.Instance.DiscardCard(this);
+
+
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
