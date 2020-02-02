@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
+  timeInHand: 0
   cardTier: 1
   frequency: 372
   cardName: Resource-Rich Asteroid
   cardDescription: 
-  flavourText: Free resources, just floating in space! Useful for ship repairs
+  flavourText: Free resources, just floating in space!
   events:
   - eventType: 4
     valueRange: {x: 1, y: 1}
