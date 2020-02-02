@@ -13,8 +13,12 @@ public class Hand : MonoBehaviour
     public int Turn;
     public int currentTier = 1;
 
+    AudioSource audioSource;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>(); 
+
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -38,6 +42,7 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         UpdateHandSize(HandSize);
+ 
     }
 
     private void UpdateHandSize(int final)
@@ -149,7 +154,9 @@ public class Hand : MonoBehaviour
             cards.Add(drawnCard);
             RebuildHandPositions();
 
+
         }
+        audioSource.Play();
     }
 
     // Update is called once per frame
