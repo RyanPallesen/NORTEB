@@ -31,4 +31,4 @@ Material:
     m_Floats:
     - _Type: 0
     m_Colors:
-    - Color_97DAE044: {r: 0.31167677, g: 0.6017265, b: 0.6415094, a: 0}
+    - Color_97DAE044: {r: 0, g: 0.8732395, b: 1, a: 0}
