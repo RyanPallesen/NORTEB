@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CustomPiece", menuName = "Custom/TetrisPiece", order = 1)]
-public class TetrisPiece : ScriptableObject
+public class TetrisPiece
 {
 
     public enum ResourceType //note; randomize between two of the existing resources

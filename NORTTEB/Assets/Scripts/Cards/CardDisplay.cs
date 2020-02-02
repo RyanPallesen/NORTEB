@@ -16,9 +16,6 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
 
     private Card card;
 
-    public List<TetrisPiece.Square> primarySquares;
-    public List<TetrisPiece.Square> secondarySquares;
-
     public GameObject tetrisObjectPrimary;
     public GameObject tetrisObjectSecondary;
 
@@ -37,24 +34,40 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
         {
             if (cardEvent.eventType == BaseCard.EventType.ResourceCard)
             {
-                GameObject obj = card.cardPrimary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType, out primarySquares);
+                GameObject obj = card.cardPrimary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType);
                 obj.transform.SetParent(transform);
                 obj.transform.localPosition = new Vector3(0, 80, 0);
 
                 tetrisObjectPrimary = obj;
+
+                for (int i = 0; i < tetrisObjectPrimary.GetComponent<TetrisParent>().squares.Count; i++)
+                {
+                    Transform transform = tetrisObjectPrimary.transform.GetChild(i);
+                    if (transform)
+                        tetrisObjectPrimary.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Type", (int)tetrisObjectPrimary.GetComponent<TetrisParent>().squares[i].resourceType);
+                }
             }
         }
         foreach (BaseCard.Event cardEvent in card.cardSecondary.events)
         {
             if (cardEvent.eventType == BaseCard.EventType.ResourceCard)
             {
-                GameObject obj = card.cardSecondary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType, out secondarySquares);
+                GameObject obj = card.cardSecondary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType);
                 obj.transform.SetParent(transform);
                 obj.transform.localPosition = new Vector3(0, -210, 0);
 
                 tetrisObjectSecondary = obj;
+
+                for (int i = 0; i < tetrisObjectSecondary.GetComponent<TetrisParent>().squares.Count; i++)
+                {
+                    Transform transform = tetrisObjectSecondary.transform.GetChild(i);
+                    if(transform)
+                    transform.GetComponent<Renderer>().material.SetFloat("_Type", (int)tetrisObjectSecondary.GetComponent<TetrisParent>().squares[i].resourceType);
+                }
             }
         }
+
+
     }
 
     public bool card1Displayed = true;
@@ -91,10 +104,33 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     public void RotateCard()
     {
         card1Displayed = !card1Displayed;
-        Vector3 tempPos = tetrisObjectSecondary.transform.position;
 
-        tetrisObjectSecondary.transform.position = tetrisObjectPrimary.transform.position;
-        tetrisObjectPrimary.transform.position = tempPos;
+        if (tetrisObjectPrimary)
+        {
+            if (card1Displayed)
+            {
+                tetrisObjectPrimary.transform.localPosition = new Vector3(0, 80, 0);
+            }
+            else
+            {
+                tetrisObjectPrimary.transform.localPosition = new Vector3(0, -210, 0);
+            }
+
+        }
+
+        if (tetrisObjectSecondary)
+        {
+            if (card1Displayed)
+            {
+                tetrisObjectSecondary.transform.localPosition = new Vector3(0, -210, 0);
+            }
+            else
+            {
+                tetrisObjectSecondary.transform.localPosition = new Vector3(0, 80, 0);
+            }
+
+        }
+
         //transform.Rotate(new Vector3(0, 0, 180));
         UpdateText();
     }

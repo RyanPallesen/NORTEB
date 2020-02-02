@@ -7,7 +7,6 @@ public class TetrisHandler : MonoBehaviour
 
 
     public bool isPlacing = false;
-    public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
     public GameObject tetrisObj;
     private static TetrisHandler _instance;
     private bool isValidPlacement;
@@ -22,9 +21,10 @@ public class TetrisHandler : MonoBehaviour
     public GameObject fuelObject;
     public GameObject metalObject;
 
-
+    public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
     public List<BaseCard.resourceCache> resources = new List<BaseCard.resourceCache>();
 
+    public Dictionary<TetrisPiece.PieceType, List<TetrisPiece.Square>> pieceDictionary = new Dictionary<TetrisPiece.PieceType, List<TetrisPiece.Square>>();
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -35,6 +35,73 @@ public class TetrisHandler : MonoBehaviour
         {
             _instance = this;
         }
+
+        pieceDictionary.Add(TetrisPiece.PieceType.Dot, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 }
+        }
+        );
+
+        pieceDictionary.Add(TetrisPiece.PieceType.I, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 1 },
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 2 },
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 3 },
+        }
+        );
+
+        pieceDictionary.Add(TetrisPiece.PieceType.S, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 1 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = 1 },
+        }
+);
+
+        pieceDictionary.Add(TetrisPiece.PieceType.Z, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = -1 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = -1 },
+        }
+);
+        pieceDictionary.Add(TetrisPiece.PieceType.O, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 1 },
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 1 },
+        }
+);
+
+        pieceDictionary.Add(TetrisPiece.PieceType.T, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = -1 },
+        }
+);
+        pieceDictionary.Add(TetrisPiece.PieceType.L, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 0, yOffset = -1 },
+        }
+);
+        pieceDictionary.Add(TetrisPiece.PieceType.J, new List<TetrisPiece.Square>()
+        {
+            new TetrisPiece.Square() { xOffset = 0, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 1, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = 0 },
+            new TetrisPiece.Square() { xOffset = 2, yOffset = -1 },
+        }
+);
+
     }
 
     private void Start()
@@ -49,6 +116,12 @@ public class TetrisHandler : MonoBehaviour
             isPlacing = true;
             tetrisObj = resources[0].gameObject;
             squares = resources[0].squares;
+
+            for (int i = 0; i < squares.Count; i++)
+            {
+                tetrisObj.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Type", (int)squares[i].resourceType);
+            }
+
         }
 
         if (isPlacing)
@@ -216,7 +289,10 @@ public class TetrisHandler : MonoBehaviour
                     }
 
                     isPlacing = false;
-                    resources.Remove(resources[0]);
+                    if(resources.Count > 0)
+                    {
+                        resources.Remove(resources[0]);
+                    }
                 }
 
             }
