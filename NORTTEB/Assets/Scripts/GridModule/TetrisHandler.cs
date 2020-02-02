@@ -55,12 +55,12 @@ public class TetrisHandler : MonoBehaviour
         {
             tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tetrisObj.transform.Translate(new Vector3(0, 0, 189));
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 tetrisObj.transform.Rotate(new Vector3(0, 0, -90));
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 tetrisObj.transform.Rotate(new Vector3(0, 0, 90));
             }
