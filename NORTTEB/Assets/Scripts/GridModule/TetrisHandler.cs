@@ -128,6 +128,8 @@ public class TetrisHandler : MonoBehaviour
         {
             tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tetrisObj.transform.Translate(new Vector3(0, 0, 189));
+            
+            //Rotate piece
             if (Input.GetKeyDown(KeyCode.E))
             {
                 tetrisObj.transform.Rotate(new Vector3(0, 0, -90));
@@ -183,10 +185,7 @@ public class TetrisHandler : MonoBehaviour
                 }
 
                 if (isValidPlacement)
-                {
-
-
-
+                {                                       
                     for (int i = 0; i < tetrisObj.transform.childCount; i++)
                     {
                         //raycast backwards to see if there is a grid square behind
@@ -211,8 +210,7 @@ public class TetrisHandler : MonoBehaviour
                                     else
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
-
-
+                                        
                                         if (CubeType == TetrisPiece.ResourceType.Flexible)
                                         {
                                             squares[i].resourceType = GridType;
@@ -270,10 +268,6 @@ public class TetrisHandler : MonoBehaviour
                                     else // hit somethign with same resource type.
                                     {
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
-
-
-
-
                                     }
                                 }
                                 //if gridtype != resourcetype and grid is empty, destroy cube
@@ -282,9 +276,6 @@ public class TetrisHandler : MonoBehaviour
                                     Destroy(workingTransform.gameObject);
                                 }
                             };
-
-
-
                         }
                     }
 
