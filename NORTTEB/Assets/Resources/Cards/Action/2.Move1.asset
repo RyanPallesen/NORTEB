@@ -18,17 +18,11 @@ MonoBehaviour:
   cardTier: 2
   frequency: 18
   cardName: Cheap Accelerant
-  cardDescription: Move 1 for 2 random damage
+  cardDescription: Move 1 for 1 random damage
   flavourText: An outpost on a passing comet is selling cheap accelerant. Every little
     bit counts.
   events:
   - eventType: 7
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
     valueRange: {x: 1, y: 1}
     cardType: 2
     resourceType: 0

@@ -98,11 +98,11 @@ public class BaseCard : ScriptableObject
                     {
                         if (_cardDisplay.card1Displayed)
                         {
-                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.primarySquares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectPrimary, TetrisHandler.Instance.transform, true) });
+                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.tetrisObjectPrimary.GetComponent<TetrisParent>().squares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectPrimary, TetrisHandler.Instance.transform, true) });
                         }
                         else
                         {
-                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.secondarySquares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectSecondary, TetrisHandler.Instance.transform, true) });
+                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.tetrisObjectSecondary.GetComponent<TetrisParent>().squares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectSecondary, TetrisHandler.Instance.transform, true) });
                         }
                     }
                     break;
@@ -371,51 +371,30 @@ public class BaseCard : ScriptableObject
 
 
     [System.Serializable]
-    public class resourceCache
+    public struct resourceCache
     {
-        public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
+        public List<TetrisPiece.Square> squares;
         public GameObject gameObject;
     }
 
-    public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
-
-    public GameObject UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType, out List<TetrisPiece.Square> squareOut)
+    public GameObject UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
     {
 
+        List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
+        squares.Clear();
+
         Debug.Log("Used resource card");
-        switch (pieceType)
+        
+        if(pieceType == TetrisPiece.PieceType.RandomNonDot)
         {
-            case TetrisPiece.PieceType.RandomNonDot:
-                return UseResourceCard((TetrisPiece.PieceType)Random.Range(3, 9), resourceType, out squareOut);
-
-            case TetrisPiece.PieceType.Random:
-                return UseResourceCard((TetrisPiece.PieceType)Random.Range(2, 9), resourceType, out squareOut);
-
-            case TetrisPiece.PieceType.Dot:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/Dot").squares;
-                break;
-            case TetrisPiece.PieceType.I:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/I").squares;
-                break;
-            case TetrisPiece.PieceType.S:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/S").squares;
-                break;
-            case TetrisPiece.PieceType.Z:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/Z").squares;
-                break;
-            case TetrisPiece.PieceType.O:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/O").squares;
-                break;
-            case TetrisPiece.PieceType.T:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/T").squares;
-                break;
-            case TetrisPiece.PieceType.L:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/L").squares;
-                break;
-            case TetrisPiece.PieceType.J:
-                squares = Resources.Load<TetrisPiece>("Tetrominoes/J").squares;
-                break;
+            return UseResourceCard((TetrisPiece.PieceType)Random.Range(3, 9), resourceType);
         }
+        if (pieceType == TetrisPiece.PieceType.Random)
+        {
+            return UseResourceCard((TetrisPiece.PieceType)Random.Range(2, 9), resourceType);
+        }
+                squares = TetrisHandler.Instance.pieceDictionary[pieceType];
+        
 
         switch (resourceType)
         {
@@ -463,9 +442,9 @@ public class BaseCard : ScriptableObject
                 break;
         }
 
-        squareOut = squares;
         GameObject ParentObject = new GameObject();
         ParentObject.transform.position = Vector3.zero;
+        ParentObject.AddComponent<TetrisParent>().squares = squares.Select(square => new TetrisPiece.Square() { xOffset = square.xOffset, yOffset = square.yOffset, resourceType = square.resourceType }).ToList(); ;
 
         foreach (TetrisPiece.Square square in squares)
         {
@@ -474,9 +453,9 @@ public class BaseCard : ScriptableObject
             cube.transform.SetParent(ParentObject.transform);
 
             cube.transform.localPosition = new Vector3(square.yOffset, square.xOffset);
+            cube.GetComponent<TetrisTag>().ResourceType = square.resourceType;
 
             cube.GetComponent<Renderer>().material.SetFloat("_Type", (int)square.resourceType);
-            cube.GetComponent<TetrisTag>().ResourceType = square.resourceType;
 
         }
 
