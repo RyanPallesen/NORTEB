@@ -18,22 +18,10 @@ MonoBehaviour:
   cardTier: 1
   frequency: 12
   cardName: Nitrous Canister
-  cardDescription: Move 2 for 5 random damage
+  cardDescription: Move 2 for 3 random damage
   flavourText: You find a galactic merchant with a stock of nitrous. Powerful stuff.
   events:
   - eventType: 7
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
     valueRange: {x: 1, y: 1}
     cardType: 2
     resourceType: 0

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
+  timeInHand: 0
   cardTier: 1
   frequency: 2
   cardName: Repair Patch
-  cardDescription: 2 FUEL repair
+  cardDescription: 3 FUEL repair
   flavourText: Solid patches that can mend your thrusters
   events:
   - eventType: 4

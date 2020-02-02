@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFullCard: 0
   baseCardType: 0
+  timeInHand: 0
   cardTier: 1
   frequency: 2
   cardName: Repair Patch
-  cardDescription: 2 WING repair
+  cardDescription: 3 WING repair
   flavourText: Solid patches that can mend your wings
   events:
   - eventType: 4
