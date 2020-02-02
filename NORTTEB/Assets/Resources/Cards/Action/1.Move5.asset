@@ -29,63 +29,10 @@ MonoBehaviour:
     eventTypeNix: 0
     tetrisPiece: 0
   - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
-    cardType: 2
-    resourceType: 0
-    eventTypeNix: 0
-    tetrisPiece: 0
-  - eventType: 2
-    valueRange: {x: 1, y: 1}
+    valueRange: {x: 10, y: 10}
     cardType: 2
     resourceType: 0
     eventTypeNix: 0
     tetrisPiece: 0
   delayedEvents: []
+  tetrisObject: {fileID: 0}
