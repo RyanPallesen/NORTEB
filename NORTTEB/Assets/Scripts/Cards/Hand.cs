@@ -163,14 +163,17 @@ public class Hand : MonoBehaviour
         {
 
             List<CardDisplay> discards = new List<CardDisplay>();
+            List<BaseCard> autoPlay = new List<BaseCard>();
 
             foreach (CardDisplay cardDisplay in cards)
             {
-
-
                 if (cardDisplay.Card.cardPrimary.baseCardType == BaseCard.BaseCardType.Event)
                 {
-                    cardDisplay.DoCard();
+                    autoPlay.Add(cardDisplay.Card.cardPrimary);
+                }
+                if (cardDisplay.Card.cardSecondary.baseCardType == BaseCard.BaseCardType.Event)
+                {
+                    autoPlay.Add(cardDisplay.Card.cardSecondary);
                 }
 
                 foreach (BaseCard.DelayedEvent Devent in cardDisplay.Card.cardPrimary.delayedEvents)
@@ -181,7 +184,7 @@ public class Hand : MonoBehaviour
                     }
                     if (cardDisplay.Card.cardPrimary.timeInHand == Devent.turnDelay)
                     {
-                        cardDisplay.Card.cardPrimary.DoCardBehaviour();
+                        autoPlay.Add(cardDisplay.Card.cardPrimary);
 
                     }
 
@@ -196,7 +199,7 @@ public class Hand : MonoBehaviour
 
                     if (cardDisplay.Card.cardSecondary.timeInHand == Devent.turnDelay)
                     {
-                        cardDisplay.Card.cardSecondary.DoCardBehaviour();
+                        autoPlay.Add(cardDisplay.Card.cardSecondary);
                     }
 
                 }
@@ -210,6 +213,12 @@ public class Hand : MonoBehaviour
             {
                 DiscardCard(discards[i]);
             }
+
+            for (int i = 0; i < autoPlay.Count; i++)
+            {
+                autoPlay[i].DoCardBehaviour();
+            }
+
             Movement++;
             Turn++;
 

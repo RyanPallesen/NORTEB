@@ -61,6 +61,8 @@ public class BaseCard : ScriptableObject
     public List<Event> events = new List<Event>();
     public List<DelayedEvent> delayedEvents = new List<DelayedEvent>();
 
+    private List<GameObject> tetrisObject = new List<GameObject>();
+
     public bool DoCardBehaviour()
     {
         bool shouldDiscard = true;
@@ -84,9 +86,29 @@ public class BaseCard : ScriptableObject
                     DrawCardType(cardEvent.cardType, cardEvent.valueRange);
                     break;
                 case EventType.ResourceCard:
-                    AddResourceCache(cardEvent.tetrisPiece, cardEvent.resourceType);
+                    AddResourceCache(cardEvent.tetrisPiece, cardEvent.resourceType, cardEvent.valueRange);
                     break;
                 case EventType.NixEvent:
+
+                    List<CardDisplay> discards = new List<CardDisplay>();
+                    foreach(CardDisplay cardDisplay in Hand.Instance.cards)
+                    {
+                        if(cardDisplay.Card.cardPrimary.baseCardType == BaseCardType.Event)
+                        {
+                            discards.Add(cardDisplay);
+                        }
+
+                        if (cardDisplay.Card.cardSecondary.baseCardType == BaseCardType.Event)
+                        {
+                            discards.Add(cardDisplay);
+                        }
+                    }
+
+                    for(int i = 0; i < discards.Count; i++)
+                    {
+                        Hand.Instance.DiscardCard(discards[i]);
+                    }
+
                     break;
                 case EventType.Junk:
                     shouldDiscard = false;
@@ -197,9 +219,9 @@ public class BaseCard : ScriptableObject
                         {
                             List<Transform> childs = TetrisHandler.Instance.fuelObject.GetComponentsInChildren<Transform>().ToList();
                             childs.Remove(TetrisHandler.Instance.fuelObject.transform);
-                            
+
                             List<Transform> truechilds = new List<Transform>();
-                            foreach(Transform child in childs)
+                            foreach (Transform child in childs)
                             {
                                 if (child.childCount < 1)
                                 {
@@ -211,14 +233,14 @@ public class BaseCard : ScriptableObject
 
                             Destroy(randomObject);
                         }
-                        else if(TetrisHandler.Instance.fuelList.Count > 0)
+                        else if (TetrisHandler.Instance.fuelList.Count > 0)
                         {
                             int index = Random.Range(0, TetrisHandler.Instance.fuelList.Count);
                             GameObject temp = TetrisHandler.Instance.fuelList[index];
                             TetrisHandler.Instance.fuelList.RemoveAt(index);
                             Destroy(temp);
                         }
-                       
+
                     }
                 }
                 break;
@@ -337,9 +359,19 @@ public class BaseCard : ScriptableObject
         public TetrisPiece.ResourceType ResourceType;
     }
 
-    public void AddResourceCache(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
+    public void AddResourceCache(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType, Vector2 num)
     {
-        TetrisHandler.Instance.resources.Add(new resourceCache { PieceType = pieceType, ResourceType = resourceType });
+        if (num == Vector2.zero)
+        {
+            num = Vector2.one;
+        }
+
+        int random = (int)Random.Range(num.x, num.y);
+        for (int i = 0; i < random; i++)
+        {
+            Debug.Log(i);
+            TetrisHandler.Instance.resources.Add(new resourceCache { PieceType = pieceType, ResourceType = resourceType });
+        }
     }
 
     public static void UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
