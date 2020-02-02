@@ -19,6 +19,6 @@ public class ScoreHandler : MonoBehaviour
     void Update()
     {
 
-        GetComponent<TextMeshProUGUI>().text = "Movement : " + ((Hand.Instance.Movement * 100) + Hand.Instance.Turn * 25);
+        GetComponent<TextMeshProUGUI>().text = "Movement : " + (Hand.Instance.Movement * 100) + "k KM";
     }
 }
