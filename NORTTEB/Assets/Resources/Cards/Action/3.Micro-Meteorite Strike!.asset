@@ -19,7 +19,7 @@ MonoBehaviour:
   frequency: 12
   cardName: Micro-Meteorite Strike!
   cardDescription: A tiny meteorite punches through your ship!
-  flavourText: No repairing that one. Should've called on Steve.
+  flavourText: That'll leave a mark. Should've called on Steve.
   events:
   - eventType: 8
     valueRange: {x: 1, y: 1}
@@ -29,4 +29,3 @@ MonoBehaviour:
     tetrisPiece: 2
   delayedEvents: []
   tetrisObject: {fileID: 0}
-  squares: []

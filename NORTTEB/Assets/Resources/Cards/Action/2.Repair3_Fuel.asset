@@ -18,7 +18,7 @@ MonoBehaviour:
   cardTier: 2
   frequency: 4
   cardName: Repair Patch
-  cardDescription: 2 FUEL repair
+  cardDescription: 3 FUEL repair
   flavourText: Solid patches that can mend your thrusters
   events:
   - eventType: 4
@@ -28,3 +28,4 @@ MonoBehaviour:
     eventTypeNix: 0
     tetrisPiece: 2
   delayedEvents: []
+  tetrisObject: {fileID: 0}
