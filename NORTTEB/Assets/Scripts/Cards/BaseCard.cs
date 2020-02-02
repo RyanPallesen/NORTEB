@@ -47,6 +47,8 @@ public class BaseCard : ScriptableObject
         public int turnDelay = 1;
     }
 
+
+
     public bool isFullCard = false;
 
     public BaseCardType baseCardType = BaseCardType.Action;
@@ -61,9 +63,9 @@ public class BaseCard : ScriptableObject
     public List<Event> events = new List<Event>();
     public List<DelayedEvent> delayedEvents = new List<DelayedEvent>();
 
-    private List<GameObject> tetrisObject = new List<GameObject>();
+    public GameObject tetrisObject;
 
-    public bool DoCardBehaviour()
+    public bool DoCardBehaviour(CardDisplay _cardDisplay)
     {
         bool shouldDiscard = true;
 
@@ -86,14 +88,30 @@ public class BaseCard : ScriptableObject
                     DrawCardType(cardEvent.cardType, cardEvent.valueRange);
                     break;
                 case EventType.ResourceCard:
-                    AddResourceCache(cardEvent.tetrisPiece, cardEvent.resourceType, cardEvent.valueRange);
+                    if (cardEvent.valueRange == Vector2.zero)
+                    {
+                        cardEvent.valueRange = new Vector2Int(1, 1);
+                    }
+
+                    int random = (int)Random.Range(cardEvent.valueRange.x, cardEvent.valueRange.y);
+                    for (int i = 0; i < random; i++)
+                    {
+                        if (_cardDisplay.card1Displayed)
+                        {
+                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.primarySquares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectPrimary, TetrisHandler.Instance.transform, true) });
+                        }
+                        else
+                        {
+                            TetrisHandler.Instance.resources.Add(new resourceCache { squares = _cardDisplay.secondarySquares, gameObject = Instantiate<GameObject>(_cardDisplay.tetrisObjectSecondary, TetrisHandler.Instance.transform, true) });
+                        }
+                    }
                     break;
                 case EventType.NixEvent:
 
                     List<CardDisplay> discards = new List<CardDisplay>();
-                    foreach(CardDisplay cardDisplay in Hand.Instance.cards)
+                    foreach (CardDisplay cardDisplay in Hand.Instance.cards)
                     {
-                        if(cardDisplay.Card.cardPrimary.baseCardType == BaseCardType.Event)
+                        if (cardDisplay.Card.cardPrimary.baseCardType == BaseCardType.Event)
                         {
                             discards.Add(cardDisplay);
                         }
@@ -104,7 +122,7 @@ public class BaseCard : ScriptableObject
                         }
                     }
 
-                    for(int i = 0; i < discards.Count; i++)
+                    for (int i = 0; i < discards.Count; i++)
                     {
                         Hand.Instance.DiscardCard(discards[i]);
                     }
@@ -353,61 +371,49 @@ public class BaseCard : ScriptableObject
 
 
     [System.Serializable]
-    public struct resourceCache
+    public class resourceCache
     {
-        public TetrisPiece.PieceType PieceType;
-        public TetrisPiece.ResourceType ResourceType;
+        public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
+        public GameObject gameObject;
     }
 
-    public void AddResourceCache(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType, Vector2 num)
-    {
-        if (num == Vector2.zero)
-        {
-            num = Vector2.one;
-        }
+    public List<TetrisPiece.Square> squares = new List<TetrisPiece.Square>();
 
-        int random = (int)Random.Range(num.x, num.y);
-        for (int i = 0; i < random; i++)
-        {
-            Debug.Log(i);
-            TetrisHandler.Instance.resources.Add(new resourceCache { PieceType = pieceType, ResourceType = resourceType });
-        }
-    }
-
-    public static void UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType)
+    public GameObject UseResourceCard(TetrisPiece.PieceType pieceType, TetrisPiece.ResourceType resourceType, out List<TetrisPiece.Square> squareOut)
     {
 
+        Debug.Log("Used resource card");
         switch (pieceType)
         {
             case TetrisPiece.PieceType.RandomNonDot:
-                UseResourceCard((TetrisPiece.PieceType)Random.Range(3, 9), resourceType);
-                return;
+                return UseResourceCard((TetrisPiece.PieceType)Random.Range(3, 9), resourceType, out squareOut);
+
             case TetrisPiece.PieceType.Random:
-                UseResourceCard((TetrisPiece.PieceType)Random.Range(2, 9), resourceType);
-                return;
+                return UseResourceCard((TetrisPiece.PieceType)Random.Range(2, 9), resourceType, out squareOut);
+
             case TetrisPiece.PieceType.Dot:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/Dot");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/Dot").squares;
                 break;
             case TetrisPiece.PieceType.I:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/I");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/I").squares;
                 break;
             case TetrisPiece.PieceType.S:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/S");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/S").squares;
                 break;
             case TetrisPiece.PieceType.Z:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/Z");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/Z").squares;
                 break;
             case TetrisPiece.PieceType.O:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/O");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/O").squares;
                 break;
             case TetrisPiece.PieceType.T:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/T");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/T").squares;
                 break;
             case TetrisPiece.PieceType.L:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/L");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/L").squares;
                 break;
             case TetrisPiece.PieceType.J:
-                TetrisHandler.Instance.TetrisPiece = Resources.Load<TetrisPiece>("Tetrominoes/J");
+                squares = Resources.Load<TetrisPiece>("Tetrominoes/J").squares;
                 break;
         }
 
@@ -418,49 +424,50 @@ public class BaseCard : ScriptableObject
                 TetrisPiece.ResourceType primary = (TetrisPiece.ResourceType)Random.Range(1, 4);
                 TetrisPiece.ResourceType secondary = (TetrisPiece.ResourceType)Random.Range(1, 4);
 
-                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                for (int i = 0; i < squares.Count; i++)
                 {
                     if (Random.Range(0, 100) < 50)
                     {
-                        TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = primary;
+                        squares[i].resourceType = primary;
                     }
                     else
                     {
-                        TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = secondary;
+                        squares[i].resourceType = secondary;
                     }
                 }
 
                 break;
             case TetrisPiece.ResourceType.Air:
-                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                for (int i = 0; i < squares.Count; i++)
                 {
-                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Air;
+                    squares[i].resourceType = TetrisPiece.ResourceType.Air;
                 }
                 break;
             case TetrisPiece.ResourceType.Metal:
-                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                for (int i = 0; i < squares.Count; i++)
                 {
-                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Metal;
+                    squares[i].resourceType = TetrisPiece.ResourceType.Metal;
                 }
                 break;
             case TetrisPiece.ResourceType.Fuel:
-                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                for (int i = 0; i < squares.Count; i++)
                 {
-                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Fuel;
+                    squares[i].resourceType = TetrisPiece.ResourceType.Fuel;
                 }
                 break;
             case TetrisPiece.ResourceType.Flexible:
-                for (int i = 0; i < TetrisHandler.Instance.TetrisPiece.squares.Count; i++)
+                for (int i = 0; i < squares.Count; i++)
                 {
-                    TetrisHandler.Instance.TetrisPiece.squares[i].resourceType = TetrisPiece.ResourceType.Flexible;
+                    squares[i].resourceType = TetrisPiece.ResourceType.Flexible;
                 }
                 break;
         }
 
+        squareOut = squares;
         GameObject ParentObject = new GameObject();
         ParentObject.transform.position = Vector3.zero;
 
-        foreach (TetrisPiece.Square square in TetrisHandler.Instance.TetrisPiece.squares)
+        foreach (TetrisPiece.Square square in squares)
         {
             GameObject cube = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/TetrisCube"));
 
@@ -473,9 +480,8 @@ public class BaseCard : ScriptableObject
 
         }
 
-        TetrisHandler.Instance.tetrisObj = ParentObject;
+        
 
-
-        TetrisHandler.Instance.isPlacing = true;
+        return ParentObject;
     }
 }

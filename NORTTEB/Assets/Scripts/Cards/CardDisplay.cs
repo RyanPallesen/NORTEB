@@ -16,7 +16,13 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
 
     private Card card;
 
-    private void Start()
+    public List<TetrisPiece.Square> primarySquares;
+    public List<TetrisPiece.Square> secondarySquares;
+
+    public GameObject tetrisObjectPrimary;
+    public GameObject tetrisObjectSecondary;
+
+    public void Init()
     {
         if (Card.cardPrimary.isFullCard)
         {
@@ -25,6 +31,29 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
         else if (Card.cardSecondary.isFullCard)
         {
             Card.cardPrimary = Card.cardSecondary;
+        }
+
+        foreach (BaseCard.Event cardEvent in card.cardPrimary.events)
+        {
+            if (cardEvent.eventType == BaseCard.EventType.ResourceCard)
+            {
+                GameObject obj = card.cardPrimary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType, out primarySquares);
+                obj.transform.SetParent(transform);
+                obj.transform.localPosition = new Vector3(0, 80, 0);
+
+                tetrisObjectPrimary = obj;
+            }
+        }
+        foreach (BaseCard.Event cardEvent in card.cardSecondary.events)
+        {
+            if (cardEvent.eventType == BaseCard.EventType.ResourceCard)
+            {
+                GameObject obj = card.cardSecondary.UseResourceCard(cardEvent.tetrisPiece, cardEvent.resourceType, out secondarySquares);
+                obj.transform.SetParent(transform);
+                obj.transform.localPosition = new Vector3(0, -210, 0);
+
+                tetrisObjectSecondary = obj;
+            }
         }
     }
 
@@ -62,6 +91,10 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     public void RotateCard()
     {
         card1Displayed = !card1Displayed;
+        Vector3 tempPos = tetrisObjectSecondary.transform.position;
+
+        tetrisObjectSecondary.transform.position = tetrisObjectPrimary.transform.position;
+        tetrisObjectPrimary.transform.position = tempPos;
         //transform.Rotate(new Vector3(0, 0, 180));
         UpdateText();
     }
@@ -71,18 +104,16 @@ public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
         bool shouldDiscard = false;
         if (card1Displayed)
         {
-            shouldDiscard = Card.cardPrimary.DoCardBehaviour();
+            shouldDiscard = Card.cardPrimary.DoCardBehaviour(this);
         }
         else
         {
-            shouldDiscard = Card.cardSecondary.DoCardBehaviour();
+            shouldDiscard = Card.cardSecondary.DoCardBehaviour(this);
         }
 
-            if (shouldDiscard)
+        if (shouldDiscard)
         {
             Hand.Instance.DiscardCard(this);
-
-
         }
     }
 

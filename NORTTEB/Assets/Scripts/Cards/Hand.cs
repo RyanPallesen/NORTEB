@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -143,8 +144,11 @@ public class Hand : MonoBehaviour
             
             CardDisplay drawnCard = card.GetComponentInChildren<CardDisplay>();
 
+            drawnCard.Init();
+
             cards.Add(drawnCard);
             RebuildHandPositions();
+
         }
     }
 
@@ -170,6 +174,7 @@ public class Hand : MonoBehaviour
                 if (cardDisplay.Card.cardPrimary.baseCardType == BaseCard.BaseCardType.Event)
                 {
                     autoPlay.Add(cardDisplay.Card.cardPrimary);
+                    discards.Add(cardDisplay);
                 }
                 if (cardDisplay.Card.cardSecondary.baseCardType == BaseCard.BaseCardType.Event)
                 {
@@ -181,10 +186,12 @@ public class Hand : MonoBehaviour
                     if (Devent.eventType == BaseCard.EventType.Junk)
                     {
                         discards.Add(cardDisplay);
+
                     }
                     if (cardDisplay.Card.cardPrimary.timeInHand == Devent.turnDelay)
                     {
                         autoPlay.Add(cardDisplay.Card.cardPrimary);
+                        discards.Add(cardDisplay);
 
                     }
 
@@ -209,14 +216,15 @@ public class Hand : MonoBehaviour
             }
 
 
-            for(int i = 0; i < discards.Count; i++)
-            {
-                DiscardCard(discards[i]);
-            }
 
             for (int i = 0; i < autoPlay.Count; i++)
             {
-                autoPlay[i].DoCardBehaviour();
+                autoPlay[i].DoCardBehaviour(null);
+            }
+
+            for (int i = 0; i < discards.Count; i++)
+            {
+                DiscardCard(discards[i]);
             }
 
             Movement++;

@@ -35,7 +35,7 @@ public class TetrisPiece : ScriptableObject
         public int xOffset;
         public int yOffset;
 
-        [HideInInspector] public ResourceType resourceType;
+         public ResourceType resourceType;
     }
 
     public List<Square> squares = new List<Square>();
