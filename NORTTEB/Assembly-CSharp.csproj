@@ -55,14 +55,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
      <Compile Include="Assets\Scripts\ActivateUI.cs" />
-
      <Compile Include="Assets\Scripts\Cards\BaseCard.cs" />
      <Compile Include="Assets\Scripts\Cards\Card.cs" />
      <Compile Include="Assets\Scripts\Cards\CardDisplay.cs" />
      <Compile Include="Assets\Scripts\Cards\Deck.cs" />
      <Compile Include="Assets\Scripts\Cards\Hand.cs" />
+     <Compile Include="Assets\Scripts\Cards\MovmentTracking.cs" />
      <Compile Include="Assets\Scripts\GridModule\Grid.cs" />
      <Compile Include="Assets\Scripts\GridModule\GridPiece.cs" />
      <Compile Include="Assets\Scripts\GridModule\TetrisHandler.cs" />
