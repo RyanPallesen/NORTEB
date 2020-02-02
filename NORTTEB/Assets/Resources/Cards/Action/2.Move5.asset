@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49576bd856fb470438a124ed2a249d09, type: 3}
   m_Name: 2.Move5
   m_EditorClassIdentifier: 
-  isFullCard: 1
+  isFullCard: 0
   baseCardType: 2
   timeInHand: 0
   cardTier: 2
