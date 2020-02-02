@@ -51,7 +51,7 @@ public class TetrisHandler : MonoBehaviour
         }
 
         if (isPlacing)
-        { 
+        {
             tetrisObj.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tetrisObj.transform.Translate(new Vector3(0, 0, 189));
             if (Input.GetKeyDown(KeyCode.D))
@@ -64,7 +64,7 @@ public class TetrisHandler : MonoBehaviour
                 tetrisObj.transform.Rotate(new Vector3(0, 0, 90));
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 isValidPlacement = false;
 
@@ -95,7 +95,7 @@ public class TetrisHandler : MonoBehaviour
                         }
                         else if (hit.collider.transform.GetComponent<TetrisTag>())
                         {
-                           if(hit.collider.transform.GetComponent<TetrisTag>().ResourceType == CubeType)
+                            if (hit.collider.transform.GetComponent<TetrisTag>().ResourceType == CubeType)
                             {
                                 isValidPlacement = true;
                             }
@@ -141,7 +141,7 @@ public class TetrisHandler : MonoBehaviour
                                         workingTransform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 1f);
 
 
-                                        if(CubeType == TetrisPiece.ResourceType.Flexible)
+                                        if (CubeType == TetrisPiece.ResourceType.Flexible)
                                         {
                                             TetrisPiece.squares[i].resourceType = GridType;
                                             workingTransform.GetComponent<Renderer>().material.SetFloat("_Type", (int)TetrisPiece.squares[i].resourceType);
@@ -158,8 +158,9 @@ public class TetrisHandler : MonoBehaviour
 
                                         }
                                         else if (GridType == TetrisPiece.ResourceType.Metal)
+                                        {
                                             metalList.Add(workingTransform.gameObject);
-
+                                        }
                                     }
                                     //place it
                                 }
@@ -185,7 +186,7 @@ public class TetrisHandler : MonoBehaviour
                                         {
                                             airList.Remove(hit.collider.transform.gameObject);
                                         }
-                                        else if(fuelList.Contains(hit.collider.transform.gameObject))
+                                        else if (fuelList.Contains(hit.collider.transform.gameObject))
                                         {
                                             fuelList.Remove(hit.collider.transform.gameObject);
                                         }
@@ -215,8 +216,9 @@ public class TetrisHandler : MonoBehaviour
                         }
                     }
 
+                    Debug.Log("DELETED");
                     isPlacing = false;
-                    resources.Remove(resources[0]);                    
+                    resources.Remove(resources[0]);
                 }
 
             }
